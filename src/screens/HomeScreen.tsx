@@ -56,7 +56,13 @@ export function HomeScreen({ onStartVisit, onStartSampleVisit, onOpenHistory, mo
           <Text style={styles.todayLabel}>{t('home.today')}</Text>
           <Text style={styles.todayDate}>{today}</Text>
         </View>
-        <Pressable onPress={toggleLang} hitSlop={12} accessibilityRole="button">
+        <Pressable
+          onPress={toggleLang}
+          hitSlop={12}
+          accessibilityRole="button"
+          accessibilityLabel={lang === 'ha' ? 'Switch to English' : 'Sauya zuwa Hausa'}
+          accessibilityHint="Toggles the app's display language between Hausa and English."
+        >
           <Text style={styles.langSwitch}>{lang === 'ha' ? 'EN' : 'HA'}</Text>
         </Pressable>
       </View>
@@ -87,7 +93,13 @@ export function HomeScreen({ onStartVisit, onStartSampleVisit, onOpenHistory, mo
           onPress={onStartSampleVisit}
           disabled={!modelReady}
         />
-        <Pressable onPress={onOpenHistory} hitSlop={12} accessibilityRole="link">
+        <Pressable
+          onPress={onOpenHistory}
+          hitSlop={12}
+          accessibilityRole="link"
+          accessibilityLabel={t('home.history')}
+          accessibilityHint="Opens a list of past visits."
+        >
           <Text style={styles.historyLink}>{t('home.history')} →</Text>
         </Pressable>
         {!modelReady ? (

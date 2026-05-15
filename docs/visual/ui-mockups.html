@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CHW Companion — UI mockups (screenshot at 1920×1080)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+    />
+    <style>
+      :root {
+        --terracotta: #c9532a;
+        --bone: #f4ecd8;
+        --indigo: #1b2a4e;
+        --ochre: #e8a33d;
+        --red: #b11226;
+        --green: #2e7d5b;
+        --slate: #6b6f76;
+        --card: #fbf6e8;
+        --divider: #e0d6bd;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bone);
+        color: var(--indigo);
+        font-family: 'Inter', system-ui, sans-serif;
+      }
+      .canvas {
+        width: 1920px;
+        height: 1080px;
+        margin: 0 auto;
+        padding: 56px 64px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      h1 {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 38px;
+        margin: 0;
+      }
+      .row-phones {
+        display: flex;
+        gap: 56px;
+        justify-content: center;
+        flex: 1;
+      }
+      .phone {
+        width: 390px;
+        height: 844px;
+        border-radius: 44px;
+        background: var(--indigo);
+        padding: 14px;
+        box-shadow: 0 18px 32px rgba(27, 42, 78, 0.16);
+        flex-shrink: 0;
+      }
+      .screen {
+        width: 100%;
+        height: 100%;
+        background: var(--bone);
+        border-radius: 30px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 36px 22px 22px;
+      }
+      .statusbar {
+        position: absolute;
+        top: 6px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        color: var(--indigo);
+        padding: 0 22px;
+      }
+      .notch {
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 110px;
+        height: 26px;
+        background: var(--indigo);
+        border-radius: 13px;
+      }
+      .label {
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: var(--slate);
+      }
+      .heading {
+        font-family: 'Fraunces', serif;
+        font-weight: 600;
+        font-size: 22px;
+        color: var(--indigo);
+      }
+      .display {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 56px;
+        line-height: 1.05;
+        color: var(--terracotta);
+      }
+      .body {
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        color: var(--indigo);
+      }
+      .btn-primary {
+        background: var(--terracotta);
+        color: var(--bone);
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 20px;
+        padding: 22px 24px;
+        border-radius: 18px;
+        text-align: center;
+        border: 2px solid var(--terracotta);
+      }
+      .btn-secondary {
+        background: var(--bone);
+        color: var(--indigo);
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 20px 24px;
+        border-radius: 18px;
+        text-align: center;
+        border: 2px solid var(--indigo);
+      }
+      .btn-danger {
+        background: var(--red);
+        color: var(--bone);
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 20px 24px;
+        border-radius: 18px;
+        text-align: center;
+      }
+      .severity-banner {
+        margin: -36px -22px 16px -22px;
+        background: var(--red);
+        color: var(--bone);
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 28px;
+        padding: 56px 22px 16px;
+        letter-spacing: 2px;
+      }
+      .severity-banner .sub {
+        font-size: 15px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        letter-spacing: normal;
+        margin-top: 4px;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 18px;
+        padding: 16px;
+        border: 1px solid var(--divider);
+        margin-bottom: 12px;
+      }
+      .step {
+        border: 2px solid var(--divider);
+        border-radius: 18px;
+        padding: 14px;
+        margin-bottom: 12px;
+        background: var(--card);
+      }
+      .step.done { border-color: var(--green); }
+      .step.active { border-color: var(--terracotta); }
+      .step .step-head { display: flex; align-items: center; gap: 12px; }
+      .step .dot {
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--divider);
+        color: var(--bone);
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+      }
+      .step.done .dot { background: var(--green); }
+      .step.active .dot { background: var(--terracotta); }
+      .step .step-title { font-family: 'Fraunces', serif; font-weight: 600; font-size: 18px; }
+      .photo-row { display: flex; gap: 8px; margin-top: 12px; }
+      .photo-slot {
+        flex: 1;
+        background: var(--bone);
+        border-radius: 12px;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Inter', sans-serif;
+        font-size: 12px;
+        color: var(--slate);
+        position: relative;
+        overflow: hidden;
+      }
+      .photo-slot .check {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        background: var(--green);
+        color: var(--bone);
+        width: 22px;
+        height: 22px;
+        border-radius: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+      }
+      .lang-pill {
+        position: absolute;
+        top: 80px;
+        right: 22px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        color: var(--terracotta);
+        border: 2px solid var(--terracotta);
+        padding: 4px 10px;
+        border-radius: 999px;
+      }
+      .row { display: flex; justify-content: space-between; padding: 4px 0; }
+      .row .l { color: var(--slate); }
+      .row .v { color: var(--indigo); font-weight: 500; }
+      .danger-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 4px;
+        background: var(--red);
+        margin-right: 6px;
+        vertical-align: middle;
+      }
+      .footer-cap {
+        text-align: center;
+        margin-top: 8px;
+        font-family: 'Inter', sans-serif;
+        font-size: 12px;
+        color: var(--slate);
+      }
+      .frame-cap {
+        text-align: center;
+        margin-top: 12px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--slate);
+      }
+      .legend {
+        position: absolute;
+        bottom: 16px;
+        left: 64px;
+        right: 64px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        color: var(--slate);
+        text-align: center;
+        letter-spacing: 1.5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas">
+      <h1>CHW Companion — Hausa, default. English on request.</h1>
+
+      <div class="row-phones">
+        <!-- PHONE 1: HOME -->
+        <div>
+          <div class="phone">
+            <div class="screen">
+              <div class="statusbar">
+                <span>09:41</span>
+                <span>✈ ▮▮▮ 100%</span>
+              </div>
+              <div class="notch"></div>
+
+              <span class="label" style="margin-top: 30px">Yau</span>
+              <span class="heading" style="margin-top: 2px">Litinin, 18 Mayu 2026</span>
+              <div class="lang-pill">EN</div>
+
+              <div style="margin-top: 36px">
+                <div class="display">12</div>
+                <div class="body" style="margin-top: 4px">Ziyarce-ziyarcen wannan sati</div>
+              </div>
+
+              <div style="flex: 1"></div>
+
+              <div class="btn-primary">Fara Ziyara</div>
+              <div style="height: 12px"></div>
+              <div class="btn-secondary">Tarihi →</div>
+            </div>
+          </div>
+          <div class="frame-cap">HomeScreen · "Start Visit"</div>
+        </div>
+
+        <!-- PHONE 2: VISIT MID-FLOW -->
+        <div>
+          <div class="phone">
+            <div class="screen">
+              <div class="statusbar">
+                <span>09:43</span>
+                <span>✈ ▮▮▮ 99%</span>
+              </div>
+              <div class="notch"></div>
+
+              <span class="heading" style="margin-top: 30px">Ziyara</span>
+
+              <div class="step done" style="margin-top: 18px">
+                <div class="step-head">
+                  <div class="dot">✓</div>
+                  <div class="step-title">Mataki 1 — Saurara</div>
+                </div>
+                <div class="body" style="margin-top: 6px; color: var(--green); font-size: 14px;">An saurara · 47.3s</div>
+              </div>
+
+              <div class="step active">
+                <div class="step-head">
+                  <div class="dot">2</div>
+                  <div class="step-title">Mataki 2 — Duba</div>
+                </div>
+                <div class="photo-row">
+                  <div class="photo-slot" style="background: linear-gradient(135deg, #b9886f, #d2a17b);">
+                    <span class="check">✓</span>
+                    <span style="color: white; font-weight: 600;">Fuska</span>
+                  </div>
+                  <div class="photo-slot" style="background: linear-gradient(135deg, #c98a6a, #d99e75);">
+                    <span class="check">✓</span>
+                    <span style="color: white; font-weight: 600;">Idon sawu</span>
+                  </div>
+                  <div class="photo-slot">
+                    <span>Fitsari</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="step-head">
+                  <div class="dot">3</div>
+                  <div class="step-title" style="color: var(--slate)">Mataki 3 — Tunani</div>
+                </div>
+              </div>
+
+              <div style="flex: 1"></div>
+            </div>
+          </div>
+          <div class="frame-cap">VisitScreen · mid-flow</div>
+        </div>
+
+        <!-- PHONE 3: RESULT — HERO SHOT -->
+        <div>
+          <div class="phone">
+            <div class="screen">
+              <div class="statusbar">
+                <span>09:45</span>
+                <span>✈ ▮▮▮ 98%</span>
+              </div>
+              <div class="notch"></div>
+
+              <div class="severity-banner">
+                ZAFI
+                <div class="sub">Yiwuwar pre-eclampsia</div>
+              </div>
+
+              <div class="card" style="margin-top: 4px">
+                <div class="row"><span class="l">Mara lafiya</span><span class="v">Fatima Bello</span></div>
+                <div class="row"><span class="l">GA</span><span class="v">32 w</span></div>
+                <hr style="border: none; border-top: 1px solid var(--divider); margin: 6px 0">
+                <div class="label" style="margin-bottom: 4px">Alamomi</div>
+                <div class="row"><span class="l">BP</span><span class="v">158 / 102</span></div>
+                <div class="row"><span class="l">Edema</span><span class="v">pitting</span></div>
+                <div class="row"><span class="l">Proteinuria</span><span class="v">2+</span></div>
+                <hr style="border: none; border-top: 1px solid var(--divider); margin: 6px 0">
+                <div class="label" style="margin-bottom: 4px">Alamomin hatsari</div>
+                <div class="body" style="font-size: 14px"><span class="danger-dot"></span>BP 158/102</div>
+                <div class="body" style="font-size: 14px"><span class="danger-dot"></span>Ciwon kai mai tsanani</div>
+                <div class="body" style="font-size: 14px"><span class="danger-dot"></span>Pitting edema</div>
+                <hr style="border: none; border-top: 1px solid var(--divider); margin: 6px 0">
+                <div class="label" style="margin-bottom: 4px">Shawarwari</div>
+                <div class="body" style="font-size: 15px; line-height: 22px;">Ka tura Fatima zuwa Asibitin Janar na Kano cikin sa'a 12.</div>
+                <div class="body" style="font-size: 12px; color: var(--slate); margin-top: 4px;">→ district_hospital · 12 h</div>
+              </div>
+
+              <div style="flex: 1"></div>
+
+              <div class="btn-secondary">Sake Karatu</div>
+              <div style="height: 8px"></div>
+              <div class="btn-danger">An Gama</div>
+            </div>
+          </div>
+          <div class="frame-cap">ResultScreen · the hero</div>
+        </div>
+      </div>
+
+      <div class="legend">
+        OFFLINE BY DEFAULT &nbsp; · &nbsp; NO PII LEAVES THE DEVICE &nbsp; · &nbsp; BUILT WITH GEMMA
+      </div>
+    </div>
+  </body>
+</html>

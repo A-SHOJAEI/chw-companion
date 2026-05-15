@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Inter, system-ui, sans-serif">
+  <!-- Bone background with subtle radial gradient -->
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#FBF6E8"/>
+      <stop offset="100%" stop-color="#F4ECD8"/>
+    </radialGradient>
+    <linearGradient id="ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C9532A"/>
+      <stop offset="100%" stop-color="#E8A33D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- Decorative ribbon top-left -->
+  <rect x="0" y="0" width="180" height="14" fill="url(#ribbon)"/>
+  <rect x="0" y="0" width="14" height="180" fill="url(#ribbon)"/>
+
+  <!-- Brand mark — initials -->
+  <g transform="translate(96 110)">
+    <rect x="0" y="0" width="64" height="64" rx="14" fill="#C9532A"/>
+    <text x="32" y="46" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="32" fill="#F4ECD8">C</text>
+  </g>
+  <text x="180" y="158" font-family="Inter, sans-serif" font-weight="500" font-size="18" fill="#6B6F76" letter-spacing="3">CHW COMPANION</text>
+
+  <!-- Hero headline -->
+  <g>
+    <text x="96" y="290" font-family="Fraunces, serif" font-weight="700" font-size="92" fill="#1B2A4E">A midwife</text>
+    <text x="96" y="380" font-family="Fraunces, serif" font-weight="700" font-size="92" fill="#1B2A4E">in every pocket.</text>
+  </g>
+
+  <!-- Subhead -->
+  <text x="96" y="450" font-family="Inter, sans-serif" font-weight="400" font-size="26" fill="#1B2A4E">Offline multimodal maternal-health triage</text>
+  <text x="96" y="486" font-family="Inter, sans-serif" font-weight="400" font-size="26" fill="#1B2A4E">on a $200 Android phone — with Gemma 4.</text>
+
+  <!-- Severity chip — story tease -->
+  <g transform="translate(96 540)">
+    <rect x="0" y="0" width="160" height="44" rx="22" fill="#B11226"/>
+    <text x="80" y="30" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="22" fill="#F4ECD8" letter-spacing="2">ZAFI</text>
+  </g>
+  <text x="276" y="568" font-family="Inter, sans-serif" font-weight="500" font-size="18" fill="#1B2A4E">Severe pre-eclampsia · refer within 12 h</text>
+
+  <!-- Severity chip — clear -->
+  <g transform="translate(96 600)">
+    <rect x="0" y="0" width="160" height="44" rx="22" fill="#2E7D5B"/>
+    <text x="80" y="30" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="22" fill="#F4ECD8" letter-spacing="2">LAFIYA</text>
+  </g>
+  <text x="276" y="628" font-family="Inter, sans-serif" font-weight="500" font-size="18" fill="#1B2A4E">Routine ANC · follow-up in 14 d</text>
+
+  <!-- Bottom strip -->
+  <rect x="0" y="690" width="1280" height="30" fill="#1B2A4E"/>
+  <text x="32" y="710" font-family="Inter, sans-serif" font-weight="500" font-size="13" fill="#F4ECD8" letter-spacing="2">BUILT WITH GEMMA · APACHE 2.0</text>
+  <text x="1248" y="710" text-anchor="end" font-family="Inter, sans-serif" font-weight="400" font-size="13" fill="#F4ECD8">github.com/chwcompanion/chw-companion</text>
+
+  <!-- Right-side accent: stylized phone frame -->
+  <g transform="translate(820 130)">
+    <rect x="0" y="0" width="320" height="500" rx="44" fill="#1B2A4E"/>
+    <rect x="14" y="14" width="292" height="472" rx="34" fill="#F4ECD8"/>
+    <!-- Notch -->
+    <rect x="140" y="20" width="40" height="8" rx="4" fill="#1B2A4E"/>
+    <!-- Inside: ZAFI banner + card -->
+    <rect x="14" y="60" width="292" height="60" fill="#B11226"/>
+    <text x="160" y="100" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="28" fill="#F4ECD8" letter-spacing="3">ZAFI</text>
+    <text x="32" y="160" font-family="Fraunces, serif" font-weight="600" font-size="18" fill="#1B2A4E">Fatima Bello · 32 w</text>
+    <text x="32" y="186" font-size="13" fill="#6B6F76">BP 158 / 102 · pitting edema · 2+</text>
+    <line x1="32" y1="206" x2="288" y2="206" stroke="#E0D6BD" stroke-width="1"/>
+    <text x="32" y="232" font-family="Fraunces, serif" font-weight="600" font-size="13" fill="#6B6F76">SHAWARWARI</text>
+    <text x="32" y="258" font-size="14" fill="#1B2A4E">Ka tura zuwa Asibitin</text>
+    <text x="32" y="276" font-size="14" fill="#1B2A4E">Janar cikin sa'a 12.</text>
+    <!-- Buttons -->
+    <rect x="32" y="310" width="256" height="50" rx="10" fill="#F4ECD8" stroke="#1B2A4E" stroke-width="2"/>
+    <text x="160" y="342" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="16" fill="#1B2A4E">Sake Karatu</text>
+    <rect x="32" y="370" width="256" height="50" rx="10" fill="#B11226"/>
+    <text x="160" y="402" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="16" fill="#F4ECD8">An Gama</text>
+  </g>
+</svg>

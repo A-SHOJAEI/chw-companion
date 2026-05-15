@@ -3,10 +3,11 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { BigButton } from '../components/BigButton';
 import { StatusBanner } from '../components/StatusBanner';
 import { TriageCard } from '../components/TriageCard';
-import { colors, severityColors, spacing, typography } from '../theme';
+import { colors, spacing, typography } from '../theme';
 import { t, getLanguage } from '../lib/i18n';
 import { speak, stopSpeaking } from '../lib/tts';
 import { getVisit, listDangerSigns, type DangerSignRow, type VisitRow } from '../lib/db';
+import { generateAndSharePdf } from '../lib/triage-pdf';
 
 interface Props {
   visitId: string;
@@ -18,6 +19,8 @@ export function ResultScreen({ visitId, wallMs, onDone }: Props) {
   const [visit, setVisit] = useState<VisitRow | null>(null);
   const [signs, setSigns] = useState<DangerSignRow[]>([]);
   const [speaking, setSpeaking] = useState(false);
+  const [printing, setPrinting] = useState(false);
+  const [printError, setPrintError] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -53,6 +56,14 @@ export function ResultScreen({ visitId, wallMs, onDone }: Props) {
     }
   };
 
+  const handlePrint = async () => {
+    setPrinting(true);
+    setPrintError(null);
+    const r = await generateAndSharePdf(visit.id);
+    setPrinting(false);
+    if (!r.ok) setPrintError(r.error ?? 'Could not generate form');
+  };
+
   return (
     <View style={styles.wrap}>
       <StatusBanner severity={severity} caption={caption} />
@@ -68,12 +79,20 @@ export function ResultScreen({ visitId, wallMs, onDone }: Props) {
           ) : null}
         </View>
 
+        {printError ? <Text style={styles.printError}>{printError}</Text> : null}
+
         <View style={styles.actions}>
           <BigButton
             title={speaking ? '…' : t('result.speakAloud')}
             variant="secondary"
             onPress={() => void handleSpeak()}
             disabled={!visit.recommended_action}
+          />
+          <BigButton
+            title={printing ? '…' : t('result.printForm')}
+            variant="secondary"
+            onPress={() => void handlePrint()}
+            disabled={printing}
           />
           <BigButton
             title={t('result.done')}
@@ -93,4 +112,5 @@ const styles = StyleSheet.create({
   metaRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   meta: { ...typography.caption, color: colors.slate },
   actions: { gap: spacing.md, marginTop: spacing.lg },
+  printError: { ...typography.caption, color: colors.clinicRed, marginTop: spacing.xs },
 });

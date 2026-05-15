@@ -129,3 +129,17 @@ Apache License 2.0 — see [LICENSE](LICENSE).
 - 🟡 Field validation with a clinical partner — required before any deployment
 
 See [docs/writeup.md](docs/writeup.md) for the Kaggle submission writeup and [docs/USER_RUNBOOK.md](docs/USER_RUNBOOK.md) for the submission-week runbook.
+
+## Deep dives
+
+| Topic | File |
+|-------|------|
+| Why on-device, not cloud (cost math + sourced) | [docs/why-not-cloud.md](docs/why-not-cloud.md) |
+| Threat model + data-sovereignty case | [docs/THREAT_MODEL.md](docs/THREAT_MODEL.md) |
+| Sync protocol (envelope encryption + QR handoff) | [docs/SYNC_PROTOCOL.md](docs/SYNC_PROTOCOL.md) |
+| APK signing + release runbook | [docs/release.md](docs/release.md) |
+| Submission checklist | [docs/submission-checklist.md](docs/submission-checklist.md) |
+| Required attributions for video + writeup | [docs/ATTRIBUTIONS.md](docs/ATTRIBUTIONS.md) |
+| Visual artifacts (screenshot ready) | [docs/visual/](docs/visual/) — architecture.svg, cover.svg, ui-mockups.html, lower-thirds.html, design-tokens.html |
+| Video assets (storyboard + scripts + captions) | [docs/video/](docs/video/) — storyboard.md, vo-hausa.txt, vo-english.txt, captions.srt, shot-list.md |
+

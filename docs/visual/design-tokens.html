@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CHW Companion — Design tokens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+    />
+    <style>
+      :root {
+        --terracotta: #c9532a;
+        --millet: #e8a33d;
+        --bone: #f4ecd8;
+        --indigo: #1b2a4e;
+        --red: #b11226;
+        --green: #2e7d5b;
+        --slate: #6b6f76;
+        --card: #fbf6e8;
+        --divider: #e0d6bd;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 56px 80px;
+        background: var(--bone);
+        color: var(--indigo);
+        font-family: 'Inter', system-ui, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      h1 {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 48px;
+        margin: 0;
+      }
+      h2 {
+        font-family: 'Fraunces', serif;
+        font-weight: 600;
+        font-size: 28px;
+        margin: 56px 0 16px;
+        border-bottom: 1px solid var(--divider);
+        padding-bottom: 8px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+      }
+      .swatch {
+        padding: 24px;
+        border-radius: 14px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        height: 130px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid var(--divider);
+      }
+      .swatch .name {
+        font-family: 'Fraunces', serif;
+        font-weight: 600;
+        font-size: 18px;
+      }
+      .typespec {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 24px;
+        align-items: baseline;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--divider);
+      }
+      .typespec .meta {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        color: var(--slate);
+      }
+      .display { font-family: 'Fraunces', serif; font-weight: 700; font-size: 32px; line-height: 1.18; }
+      .heading { font-family: 'Fraunces', serif; font-weight: 600; font-size: 24px; line-height: 1.25; }
+      .body-lg { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 18px; line-height: 1.44; }
+      .body { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 16px; line-height: 1.5; }
+      .label { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 16px; line-height: 1.38; }
+      .caption { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 13px; line-height: 1.38; color: var(--slate); }
+      .mono { font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 12px; }
+      .row { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+      .btn-primary {
+        background: var(--terracotta);
+        color: var(--bone);
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 20px;
+        padding: 22px 28px;
+        border-radius: 18px;
+        border: 2px solid var(--terracotta);
+      }
+      .btn-secondary {
+        background: var(--bone);
+        color: var(--indigo);
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 20px 24px;
+        border-radius: 18px;
+        border: 2px solid var(--indigo);
+      }
+      .banner {
+        padding: 24px 28px;
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 28px;
+        letter-spacing: 2px;
+        color: var(--bone);
+        border-radius: 12px;
+      }
+      .banner.urgent { background: var(--red); }
+      .banner.watch { background: var(--millet); color: var(--indigo); }
+      .banner.clear { background: var(--green); }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--divider);
+        border-radius: 18px;
+        padding: 20px;
+        max-width: 460px;
+      }
+      .card-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 14px; }
+      .card-row .l { color: var(--slate); }
+      .footer-note {
+        margin-top: 64px;
+        padding-top: 24px;
+        border-top: 1px solid var(--divider);
+        color: var(--slate);
+        font-size: 13px;
+      }
+      .annotation {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        color: var(--slate);
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CHW Companion — Design tokens</h1>
+    <p class="body" style="margin-top: 8px; color: var(--slate);">
+      Warm palette, generous tap targets, real Hausa. Source: <code>src/theme.ts</code>.
+    </p>
+
+    <h2>Brand palette</h2>
+    <div class="grid">
+      <div class="swatch" style="background: var(--terracotta); color: var(--bone);">
+        <div class="name">Terracotta</div>
+        <div>#C9532A · primary, brand · AA on bone</div>
+      </div>
+      <div class="swatch" style="background: var(--millet); color: var(--indigo);">
+        <div class="name">Millet ochre</div>
+        <div>#E8A33D · warnings, watch state</div>
+      </div>
+      <div class="swatch" style="background: var(--bone); color: var(--indigo); border: 2px solid var(--divider);">
+        <div class="name">Bone</div>
+        <div>#F4ECD8 · background</div>
+      </div>
+      <div class="swatch" style="background: var(--indigo); color: var(--bone);">
+        <div class="name">Deep indigo</div>
+        <div>#1B2A4E · body text · AAA on bone</div>
+      </div>
+      <div class="swatch" style="background: var(--red); color: var(--bone);">
+        <div class="name">Clinic red</div>
+        <div>#B11226 · URGENT only</div>
+      </div>
+      <div class="swatch" style="background: var(--green); color: var(--bone);">
+        <div class="name">Okra green</div>
+        <div>#2E7D5B · success, clear status</div>
+      </div>
+      <div class="swatch" style="background: var(--slate); color: var(--bone);">
+        <div class="name">Slate</div>
+        <div>#6B6F76 · captions, secondary</div>
+      </div>
+      <div class="swatch" style="background: var(--card); color: var(--indigo); border: 1px solid var(--divider);">
+        <div class="name">Card</div>
+        <div>#FBF6E8 · raised surface</div>
+      </div>
+    </div>
+
+    <h2>Typography</h2>
+    <div class="typespec">
+      <div class="meta">Fraunces 700<br />display</div>
+      <div>
+        <div class="display">Fara Ziyara — Start Visit</div>
+        <div class="annotation">32 / 38 lh · headings &amp; numbers</div>
+      </div>
+    </div>
+    <div class="typespec">
+      <div class="meta">Fraunces 600<br />heading</div>
+      <div>
+        <div class="heading">Mataki na 2 — Duba (Step 2: See)</div>
+        <div class="annotation">24 / 30 lh · screen titles, sub-sections</div>
+      </div>
+    </div>
+    <div class="typespec">
+      <div class="meta">Inter 400<br />body-lg</div>
+      <div>
+        <div class="body-lg">Ka tura Fatima zuwa Asibitin Janar na Kano cikin sa'a 12.</div>
+        <div class="annotation">18 / 26 lh · recommendation text, key sentences</div>
+      </div>
+    </div>
+    <div class="typespec">
+      <div class="meta">Inter 400<br />body</div>
+      <div>
+        <div class="body">Hawan jini: 158 a kan 102.  Tana fama da ciwon kai.</div>
+        <div class="annotation">16 / 24 lh · default reading text</div>
+      </div>
+    </div>
+    <div class="typespec">
+      <div class="meta">Inter 500<br />label</div>
+      <div>
+        <div class="label">SHAWARWARI · Recommendation</div>
+        <div class="annotation">16 / 22 lh · field labels, captions over data</div>
+      </div>
+    </div>
+    <div class="typespec">
+      <div class="meta">Inter 400<br />caption</div>
+      <div>
+        <div class="caption">→ district_hospital · 12 h · MCPC-2017-§3-severe-preeclampsia</div>
+        <div class="annotation">13 / 18 lh · meta lines, technical tags</div>
+      </div>
+    </div>
+    <div class="typespec">
+      <div class="meta">JetBrains Mono<br />mono</div>
+      <div>
+        <div class="mono">functionCalls: [{ name: "flag_danger_sign", arguments: { ... } }]</div>
+        <div class="annotation">12 / 18 lh · JSON callouts in the result screen</div>
+      </div>
+    </div>
+
+    <h2>Components</h2>
+
+    <div class="row">
+      <div class="btn-primary">Fara Ziyara (primary · 72pt tap target)</div>
+      <div class="btn-secondary">Sake Karatu (secondary)</div>
+    </div>
+    <div class="annotation" style="margin-top: 12px">BigButton — primary action, 72pt min-height per accessibility brief.</div>
+
+    <h2>Severity banners</h2>
+    <div style="display: grid; gap: 12px; max-width: 720px;">
+      <div class="banner urgent">ZAFI &nbsp;·&nbsp; Yiwuwar pre-eclampsia mai tsanani</div>
+      <div class="banner watch">A KULA &nbsp;·&nbsp; Mild pre-eclampsia</div>
+      <div class="banner clear">LAFIYA &nbsp;·&nbsp; Routine — no danger signs</div>
+    </div>
+
+    <h2>Triage card (real data)</h2>
+    <div class="card">
+      <div class="card-row"><span class="l">Mara lafiya</span><span>Fatima Bello</span></div>
+      <div class="card-row"><span class="l">GA</span><span>32 weeks</span></div>
+      <hr style="border: none; border-top: 1px solid var(--divider); margin: 8px 0">
+      <div class="label" style="margin-bottom: 4px">Alamomi</div>
+      <div class="card-row"><span class="l">BP</span><span>158 / 102 mmHg</span></div>
+      <div class="card-row"><span class="l">Edema</span><span>pitting</span></div>
+      <div class="card-row"><span class="l">Proteinuria</span><span>2+</span></div>
+      <hr style="border: none; border-top: 1px solid var(--divider); margin: 8px 0">
+      <div class="label" style="margin-bottom: 4px">Shawarwari</div>
+      <div class="body" style="font-size: 15px">Ka tura Fatima zuwa Asibitin Janar na Kano cikin sa'a 12.</div>
+      <div class="caption" style="margin-top: 6px;">→ district_hospital · 12 h</div>
+    </div>
+
+    <h2>Motion</h2>
+    <ul>
+      <li class="body">Default transitions: <strong>300 ms ease-out</strong></li>
+      <li class="body">Critical alerts (severity banner): <strong>150 ms snap</strong></li>
+      <li class="body">No glitch effects. No AI-typewriter sound. No neon.</li>
+    </ul>
+
+    <div class="footer-note">
+      Source of truth: <code>src/theme.ts</code> · this page is rendered from the same tokens.<br />
+      Built with Gemma · Apache 2.0
+    </div>
+  </body>
+</html>

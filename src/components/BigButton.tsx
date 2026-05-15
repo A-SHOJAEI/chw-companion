@@ -11,6 +11,8 @@ interface Props {
   disabled?: boolean;
   loading?: boolean;
   fullWidth?: boolean;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
 }
 
 export function BigButton({
@@ -20,12 +22,16 @@ export function BigButton({
   disabled = false,
   loading = false,
   fullWidth = true,
+  accessibilityLabel,
+  accessibilityHint,
 }: Props) {
   const palette = paletteFor(variant);
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityState={{ disabled: disabled || loading }}
+      accessibilityState={{ disabled: disabled || loading, busy: loading }}
+      accessibilityLabel={accessibilityLabel ?? title}
+      accessibilityHint={accessibilityHint}
       onPress={(e) => {
         if (disabled || loading) return;
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => undefined);

@@ -7,7 +7,7 @@ import { colors, radii, spacing, typography } from '../theme';
 import { t } from '../lib/i18n';
 import { Gemma4Engine, materializeImage, materializeWavBytes, readBytes } from '../lib/cactus';
 import { loadSystemPrompt } from '../lib/prompts';
-import { TOOLS, startVisitAndApply } from '../lib/tools';
+import { pickToolSet, recordToolDecodeOutcome, startVisitAndApply } from '../lib/tools';
 import { useVisitMachine, canProceedToReason } from '../lib/visit-state';
 
 interface Props {
@@ -60,20 +60,26 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
         (p): p is string => !!p
       );
 
+      const { tools, minimal } = pickToolSet();
       const result = await Gemma4Engine.infer({
-        systemPrompt,
+        systemPrompt: minimal
+          ? systemPrompt + '\n\n[Constrained mode active — only `record_vitals` and `recommend_action` are available. Skip flag_danger_sign and schedule_followup.]'
+          : systemPrompt,
         userText: '',
         imagePaths,
         audioBytes,
-        tools: TOOLS,
+        tools,
         maxTokens: 768,
         temperature: 0.0,
       });
 
       if (!result.ok) {
+        recordToolDecodeOutcome(false);
         dispatch({ type: 'INFERENCE_ERROR', message: result.error });
         return;
       }
+      // We treat "got at least one valid tool call" as a decode success.
+      recordToolDecodeOutcome(result.toolCalls.length > 0);
 
       const { visit } = await startVisitAndApply({
         patient_name_hint: 'Pending',

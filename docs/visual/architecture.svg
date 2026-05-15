@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" font-family="Inter, system-ui, sans-serif">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#F4ECD8"/>
+
+  <!-- Title -->
+  <text x="80" y="84" font-family="Fraunces, serif" font-weight="700" font-size="44" fill="#1B2A4E">CHW Companion — system architecture</text>
+  <text x="80" y="120" font-size="20" fill="#6B6F76">Offline, multimodal, single forward pass on a $200 Android phone</text>
+
+  <!-- Column headers -->
+  <g font-family="Inter, sans-serif" font-weight="600" font-size="14" fill="#6B6F76" letter-spacing="2">
+    <text x="160" y="190">INPUTS</text>
+    <text x="650" y="190">DEVICE  (offline)</text>
+    <text x="1320" y="190">OUTPUTS  (on phone)</text>
+  </g>
+
+  <!-- Column 1: INPUTS -->
+  <g>
+    <!-- Audio block -->
+    <rect x="80" y="220" width="380" height="140" rx="18" fill="#FBF6E8" stroke="#E0D6BD" stroke-width="2"/>
+    <circle cx="135" cy="290" r="26" fill="#C9532A"/>
+    <path d="M125 282 q10 0 10 16 M145 282 q-10 0 -10 16" stroke="#F4ECD8" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <text x="180" y="278" font-family="Fraunces, serif" font-weight="600" font-size="22" fill="#1B2A4E">60 s Hausa audio</text>
+    <text x="180" y="304" font-size="16" fill="#1B2A4E">CHW dictates the visit note</text>
+    <text x="180" y="324" font-size="14" fill="#6B6F76">16 kHz mono PCM, ~90 kB on disk</text>
+
+    <!-- Images block -->
+    <rect x="80" y="400" width="380" height="160" rx="18" fill="#FBF6E8" stroke="#E0D6BD" stroke-width="2"/>
+    <rect x="110" y="430" width="56" height="56" rx="10" fill="#C9532A"/>
+    <text x="180" y="450" font-family="Fraunces, serif" font-weight="600" font-size="22" fill="#1B2A4E">3 photos</text>
+    <text x="180" y="476" font-size="16" fill="#1B2A4E">face · ankle · dipstick</text>
+    <text x="180" y="498" font-size="14" fill="#6B6F76">JPEG, ~512×512, captured on-device</text>
+    <text x="180" y="525" font-size="14" fill="#6B6F76">facial edema · pitting edema · proteinuria pad</text>
+
+    <!-- Tool schema block -->
+    <rect x="80" y="600" width="380" height="160" rx="18" fill="#FBF6E8" stroke="#E0D6BD" stroke-width="2"/>
+    <text x="110" y="630" font-family="JetBrains Mono, monospace" font-size="14" fill="#1B2A4E">[</text>
+    <text x="130" y="648" font-family="JetBrains Mono, monospace" font-size="12" fill="#1B2A4E">record_vitals</text>
+    <text x="130" y="664" font-family="JetBrains Mono, monospace" font-size="12" fill="#1B2A4E">flag_danger_sign</text>
+    <text x="130" y="680" font-family="JetBrains Mono, monospace" font-size="12" fill="#1B2A4E">recommend_action</text>
+    <text x="130" y="696" font-family="JetBrains Mono, monospace" font-size="12" fill="#1B2A4E">schedule_followup</text>
+    <text x="110" y="714" font-family="JetBrains Mono, monospace" font-size="14" fill="#1B2A4E">]</text>
+    <text x="270" y="650" font-family="Fraunces, serif" font-weight="600" font-size="20" fill="#1B2A4E">4 tool schemas</text>
+    <text x="270" y="676" font-size="14" fill="#6B6F76">OpenAI-style JSON</text>
+    <text x="270" y="696" font-size="14" fill="#6B6F76">zod-validated at the</text>
+    <text x="270" y="714" font-size="14" fill="#6B6F76">boundary</text>
+  </g>
+
+  <!-- Arrows to center -->
+  <g stroke="#1B2A4E" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 460 290 L 600 410"/>
+    <path d="M 460 480 L 600 470"/>
+    <path d="M 460 680 L 600 540"/>
+  </g>
+
+  <!-- Column 2: DEVICE -->
+  <rect x="620" y="220" width="600" height="650" rx="24" fill="#FBF6E8" stroke="#1B2A4E" stroke-width="3"/>
+  <text x="640" y="252" font-family="Fraunces, serif" font-weight="600" font-size="20" fill="#1B2A4E">Android phone (≥ 8 GB RAM)</text>
+  <text x="640" y="276" font-size="14" fill="#6B6F76">single forward pass — no cloud, no transcription stage</text>
+
+  <!-- React Native UI -->
+  <g>
+    <rect x="640" y="300" width="560" height="60" rx="10" fill="#F4ECD8" stroke="#E0D6BD" stroke-width="1.5"/>
+    <text x="660" y="338" font-family="Inter, sans-serif" font-weight="500" font-size="18" fill="#1B2A4E">React Native UI · Expo 54 · New arch</text>
+  </g>
+
+  <!-- Nitro bridge -->
+  <g>
+    <rect x="640" y="370" width="560" height="60" rx="10" fill="#F4ECD8" stroke="#E0D6BD" stroke-width="1.5"/>
+    <text x="660" y="408" font-family="Inter, sans-serif" font-weight="500" font-size="18" fill="#1B2A4E">react-native-nitro-modules · JSI bridge (no serialization)</text>
+  </g>
+
+  <!-- Cactus runtime -->
+  <g>
+    <rect x="640" y="440" width="560" height="60" rx="10" fill="#F4ECD8" stroke="#E0D6BD" stroke-width="1.5"/>
+    <text x="660" y="478" font-family="Inter, sans-serif" font-weight="500" font-size="18" fill="#1B2A4E">cactus-react-native 1.13.1 · C++ inference engine</text>
+  </g>
+
+  <!-- Gemma 4 (the headline) -->
+  <g>
+    <rect x="640" y="510" width="560" height="120" rx="14" fill="#C9532A"/>
+    <text x="660" y="548" font-family="Fraunces, serif" font-weight="700" font-size="32" fill="#F4ECD8">Gemma 4 E4B-it</text>
+    <text x="660" y="578" font-size="15" fill="#F4ECD8">4.5B active params · int4 quant · 128K context</text>
+    <text x="660" y="600" font-size="15" fill="#F4ECD8">audio_conformer + vision_encoder + LM head</text>
+    <text x="660" y="620" font-size="15" fill="#F4ECD8">native function calling · 140 languages</text>
+  </g>
+
+  <!-- Encrypted SQLite -->
+  <g>
+    <rect x="640" y="640" width="270" height="80" rx="10" fill="#F4ECD8" stroke="#E0D6BD" stroke-width="1.5"/>
+    <text x="660" y="668" font-family="Inter, sans-serif" font-weight="500" font-size="16" fill="#1B2A4E">SQLite + SQLCipher</text>
+    <text x="660" y="690" font-size="13" fill="#6B6F76">passphrase in Android Keystore</text>
+    <text x="660" y="708" font-size="13" fill="#6B6F76">visits · danger_signs · followups</text>
+  </g>
+
+  <!-- WHO IMPAC -->
+  <g>
+    <rect x="930" y="640" width="270" height="80" rx="10" fill="#F4ECD8" stroke="#E0D6BD" stroke-width="1.5"/>
+    <text x="950" y="668" font-family="Inter, sans-serif" font-weight="500" font-size="16" fill="#1B2A4E">WHO IMPAC §3 in context</text>
+    <text x="950" y="690" font-size="13" fill="#6B6F76">verbatim — BP, edema, dipstick</text>
+    <text x="950" y="708" font-size="13" fill="#6B6F76">thresholds cited per protocol_id</text>
+  </g>
+
+  <!-- Inference path arrow -->
+  <g stroke="#1B2A4E" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 1200 480 L 1320 410"/>
+    <path d="M 1200 540 L 1320 510"/>
+    <path d="M 1200 580 L 1320 610"/>
+    <path d="M 1200 620 L 1320 710"/>
+  </g>
+
+  <!-- Column 3: OUTPUTS -->
+  <g>
+    <!-- Triage card -->
+    <rect x="1340" y="220" width="500" height="220" rx="18" fill="#FBF6E8" stroke="#E0D6BD" stroke-width="2"/>
+    <rect x="1340" y="220" width="500" height="46" rx="18" fill="#B11226"/>
+    <text x="1360" y="252" font-family="Fraunces, serif" font-weight="700" font-size="22" fill="#F4ECD8" letter-spacing="1.5">ZAFI</text>
+    <text x="1444" y="252" font-size="14" fill="#F4ECD8">Severe pre-eclampsia · MCPC-2017-§3</text>
+    <text x="1360" y="296" font-family="Fraunces, serif" font-weight="600" font-size="18" fill="#1B2A4E">Fatima Bello · 32 w</text>
+    <text x="1360" y="322" font-size="14" fill="#6B6F76">BP 158 / 102 · pitting edema · proteinuria 2+</text>
+    <text x="1360" y="356" font-family="Fraunces, serif" font-weight="600" font-size="14" fill="#6B6F76">RECOMMENDATION</text>
+    <text x="1360" y="380" font-size="16" fill="#1B2A4E">Ka tura Fatima zuwa Asibitin</text>
+    <text x="1360" y="402" font-size="16" fill="#1B2A4E">Janar na Kano cikin sa'a 12.</text>
+    <text x="1360" y="426" font-size="13" fill="#6B6F76">→ district_hospital · 12 h</text>
+
+    <!-- TTS speech -->
+    <rect x="1340" y="475" width="500" height="90" rx="14" fill="#FBF6E8" stroke="#E0D6BD" stroke-width="2"/>
+    <text x="1360" y="510" font-family="Fraunces, serif" font-weight="600" font-size="20" fill="#1B2A4E">TTS speech-back</text>
+    <text x="1360" y="536" font-size="14" fill="#6B6F76">Reads the action aloud in Hausa</text>
+    <text x="1360" y="556" font-size="14" fill="#6B6F76">expo-speech · ha-NG → en-NG fallback</text>
+
+    <!-- Printed form -->
+    <rect x="1340" y="600" width="500" height="120" rx="14" fill="#FBF6E8" stroke="#E0D6BD" stroke-width="2"/>
+    <rect x="1370" y="630" width="60" height="60" rx="4" fill="#1B2A4E"/>
+    <text x="1380" y="666" font-family="JetBrains Mono, monospace" font-size="36" fill="#F4ECD8" text-anchor="middle">█</text>
+    <text x="1450" y="640" font-family="Fraunces, serif" font-weight="600" font-size="20" fill="#1B2A4E">QR-coded triage form</text>
+    <text x="1450" y="664" font-size="14" fill="#6B6F76">PDF with patient summary +</text>
+    <text x="1450" y="684" font-size="14" fill="#6B6F76">scannable handoff for the hospital</text>
+
+    <!-- Sync (dotted, only when online) -->
+    <rect x="1340" y="740" width="500" height="80" rx="14" fill="#FBF6E8" stroke="#6B6F76" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="1360" y="770" font-family="Fraunces, serif" font-weight="600" font-size="16" fill="#6B6F76">Sync (only when online)</text>
+    <text x="1360" y="794" font-size="13" fill="#6B6F76">encrypted envelope → clinic dashboard</text>
+    <text x="1360" y="812" font-size="13" fill="#6B6F76">queued locally; never blocks the visit</text>
+  </g>
+
+  <!-- Bottom strip -->
+  <rect x="0" y="970" width="1920" height="110" fill="#1B2A4E"/>
+  <g font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#F4ECD8" letter-spacing="3">
+    <text x="120" y="1030">OFFLINE BY DEFAULT</text>
+    <text x="700" y="1030">NO PII LEAVES THE DEVICE</text>
+    <text x="1380" y="1030">APACHE 2.0 · BUILT WITH GEMMA</text>
+  </g>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1B2A4E"/>
+    </marker>
+  </defs>
+</svg>

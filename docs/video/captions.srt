@@ -1,0 +1,67 @@
+1
+00:00:00,000 --> 00:00:08,000
+Northern Nigeria. 6:14 AM.
+
+2
+00:00:08,000 --> 00:00:18,000
+[Hausa] My name is Aisha. I am the only
+health worker in my village.
+
+3
+00:00:18,000 --> 00:00:30,000
+[Hausa] Today I see Fatima. Her ankles are swollen.
+
+4
+00:00:18,000 --> 00:00:30,000
+Pre-eclampsia kills 50,000 women a year. (WHO, 2023)
+
+5
+00:00:30,000 --> 00:00:45,000
+[Hausa] There is no signal here. The nearest
+doctor is four hours away.
+
+6
+00:00:45,000 --> 00:01:10,000
+[Hausa] Now my phone listens. It sees. It thinks.
+All without the internet.
+
+7
+00:01:10,000 --> 00:01:25,000
+[Hausa] It calls the right tools. It writes the
+right form. It speaks back — in my language.
+
+8
+00:01:25,000 --> 00:01:38,000
+This is Gemma 4. Open weights. 140 languages.
+Audio, vision, and text — in one forward pass.
+
+9
+00:01:38,000 --> 00:01:55,000
+A cloud API can't help Aisha. No signal. Nigerian
+law says patient data can't leave the country.
+And the API fees would exceed her training budget.
+
+10
+00:01:55,000 --> 00:02:10,000
+When Aisha gets back to town, the visit syncs.
+The hospital in Kano knows Fatima is coming.
+
+11
+00:02:10,000 --> 00:02:25,000
+200,000 community health workers in Africa.
+1.8 billion people more than two hours from a hospital.
+
+12
+00:02:25,000 --> 00:02:40,000
+Gemma 4 speaks 140 languages. Hausa today.
+Swahili, Quechua, Bambara — next week.
+
+13
+00:02:40,000 --> 00:02:52,000
+Aisha told us something we won't forget:
+"Now, I don't have to guess."
+
+14
+00:02:52,000 --> 00:03:00,000
+CHW Companion — A midwife in every pocket.
+Built with Gemma · Apache 2.0

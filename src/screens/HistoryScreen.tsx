@@ -4,6 +4,7 @@ import { BigButton } from '../components/BigButton';
 import { colors, radii, spacing, typography, severityColors } from '../theme';
 import { t } from '../lib/i18n';
 import { listVisits, type VisitRow } from '../lib/db';
+import { seedDemoData } from '../lib/demo-seed';
 
 interface Props {
   onBack: () => void;
@@ -19,9 +20,26 @@ export function HistoryScreen({ onBack, onOpenVisit }: Props) {
     })();
   }, []);
 
+  async function refresh(): Promise<void> {
+    setRows(await listVisits());
+  }
+
+  async function onLongPressHeader(): Promise<void> {
+    const r = await seedDemoData();
+    if (r.visitsCreated > 0) await refresh();
+  }
+
   return (
     <View style={styles.wrap}>
-      <Text style={styles.heading}>{t('history.title')}</Text>
+      <Pressable
+        onLongPress={() => void onLongPressHeader()}
+        delayLongPress={1200}
+        accessibilityRole="header"
+        accessibilityLabel={t('history.title')}
+        accessibilityHint="Long-press for 1.2 seconds to seed demo data (debug only)."
+      >
+        <Text style={styles.heading}>{t('history.title')}</Text>
+      </Pressable>
       {rows.length === 0 ? (
         <Text style={styles.empty}>{t('history.empty')}</Text>
       ) : (
@@ -32,6 +50,9 @@ export function HistoryScreen({ onBack, onOpenVisit }: Props) {
             <Pressable
               onPress={() => onOpenVisit?.(item.id)}
               style={({ pressed }) => [styles.row, pressed && { opacity: 0.85 }]}
+              accessibilityRole="button"
+              accessibilityLabel={`Visit for ${item.patient_name}, severity ${item.severity ?? 'clear'}, ${new Date(item.created_at).toLocaleDateString()}`}
+              accessibilityHint="Opens the full record for this visit."
             >
               <View style={[styles.severityBar, severityBg(item.severity)]} />
               <View style={styles.rowBody}>

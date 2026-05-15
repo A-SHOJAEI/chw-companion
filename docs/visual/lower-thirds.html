@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CHW Companion — Video lower-thirds (screenshot each frame at 1920×1080)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
+    />
+    <style>
+      :root {
+        --terracotta: #c9532a;
+        --bone: #f4ecd8;
+        --indigo: #1b2a4e;
+        --ochre: #e8a33d;
+        --red: #b11226;
+        --green: #2e7d5b;
+        --slate: #6b6f76;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 64px 0;
+        background: #555;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        font-family: 'Inter', system-ui, sans-serif;
+      }
+      .frame {
+        width: 1920px;
+        height: 1080px;
+        background: #0a0a0a;
+        position: relative;
+        background-image:
+          radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.05), transparent 60%),
+          linear-gradient(135deg, #1f1f1f, #0c0c0c);
+        overflow: hidden;
+      }
+      .frame-cap {
+        color: white;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        font-weight: 500;
+        margin-top: -16px;
+      }
+      .accent-bar {
+        position: absolute;
+        left: 120px;
+        top: 760px;
+        width: 8px;
+        height: 220px;
+        background: var(--terracotta);
+        border-radius: 4px;
+      }
+      .panel {
+        position: absolute;
+        left: 140px;
+        top: 760px;
+        right: 120px;
+        background: rgba(244, 236, 216, 0.92);
+        border-radius: 14px;
+        padding: 32px 48px;
+        height: 220px;
+      }
+      .name {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 64px;
+        color: var(--indigo);
+        line-height: 1.05;
+      }
+      .role {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 28px;
+        color: var(--slate);
+        margin-top: 12px;
+      }
+      .stat {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 96px;
+        color: var(--terracotta);
+        line-height: 1;
+      }
+      .stat-sub {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 28px;
+        color: var(--indigo);
+        margin-top: 8px;
+      }
+      .stat-credit {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        color: var(--slate);
+        margin-top: 12px;
+      }
+      .tech-name {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 64px;
+        color: var(--terracotta);
+        line-height: 1.05;
+      }
+      .tech-sub {
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        color: var(--indigo);
+        margin-top: 16px;
+      }
+      .check-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 32px;
+        color: var(--indigo);
+      }
+      .check-list .item::before {
+        content: '✓';
+        color: var(--green);
+        font-weight: 700;
+        margin-right: 16px;
+        font-size: 36px;
+      }
+      .closing-stack {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--bone);
+      }
+      .closing-title {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 96px;
+        color: var(--indigo);
+        letter-spacing: 4px;
+      }
+      .closing-tag {
+        font-family: 'Fraunces', serif;
+        font-weight: 400;
+        font-style: italic;
+        font-size: 40px;
+        color: var(--terracotta);
+        margin-top: 16px;
+      }
+      .closing-credit {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+        color: var(--slate);
+        position: absolute;
+        bottom: 80px;
+        text-align: center;
+      }
+      .timing-label {
+        position: absolute;
+        top: 32px;
+        right: 32px;
+        color: rgba(255, 255, 255, 0.5);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 16px;
+        letter-spacing: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Frame 1: Stakeholder intro -->
+    <div class="frame">
+      <div class="timing-label">FRAME 1 — keys over Aisha phone-macro shot · 0:08–0:18</div>
+      <div class="accent-bar"></div>
+      <div class="panel">
+        <div class="name">AISHA MOHAMMED</div>
+        <div class="role">Community Health Worker · Northern Nigeria</div>
+      </div>
+    </div>
+    <div class="frame-cap">frame-1.png · stakeholder intro</div>
+
+    <!-- Frame 2: Mortality stat -->
+    <div class="frame">
+      <div class="timing-label">FRAME 2 — keys over Fatima-on-mat shot · 0:18–0:30</div>
+      <div class="accent-bar"></div>
+      <div class="panel">
+        <div class="stat">50,000 deaths / year</div>
+        <div class="stat-sub">from pre-eclampsia in low-resource settings</div>
+        <div class="stat-credit">Source: WHO Maternal Mortality fact sheet, 2023</div>
+      </div>
+    </div>
+    <div class="frame-cap">frame-2.png · mortality stat</div>
+
+    <!-- Frame 3: Tech callout -->
+    <div class="frame">
+      <div class="timing-label">FRAME 3 — keys over architecture-fade-in · 1:25–1:38</div>
+      <div class="accent-bar"></div>
+      <div class="panel" style="height: 240px;">
+        <div class="tech-name">GEMMA 4 E4B</div>
+        <div class="tech-sub">4.5B active params · audio + vision + text · 140 languages · 128K context</div>
+      </div>
+    </div>
+    <div class="frame-cap">frame-3.png · tech callout</div>
+
+    <!-- Frame 4: Architecture moat -->
+    <div class="frame">
+      <div class="timing-label">FRAME 4 — keys over moat split-screen · 1:38–1:55</div>
+      <div class="accent-bar" style="height: 320px;"></div>
+      <div class="panel" style="height: 320px;">
+        <div class="check-list">
+          <div class="item">No signal needed</div>
+          <div class="item">Patient data stays on device</div>
+          <div class="item">$0 per visit at scale</div>
+        </div>
+      </div>
+    </div>
+    <div class="frame-cap">frame-4.png · the moat</div>
+
+    <!-- Frame 5: Closing card -->
+    <div class="frame">
+      <div class="timing-label">FRAME 5 — closing card · 2:52–3:00</div>
+      <div class="closing-stack">
+        <div class="closing-title">CHW COMPANION</div>
+        <div class="closing-tag">A midwife in every pocket.</div>
+        <div class="closing-credit">
+          Built with Gemma &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; github.com/&lt;handle&gt;/chw-companion
+        </div>
+      </div>
+    </div>
+    <div class="frame-cap">frame-5.png · closing card (must contain "Built with Gemma")</div>
+  </body>
+</html>

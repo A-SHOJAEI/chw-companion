@@ -20,6 +20,7 @@ import {
   type VisitRow,
 } from './db';
 import { emit } from './events';
+import { scheduleFollowupNotification } from './notifications';
 
 // -----------------------------------------------------------------------------
 // Schemas — surface presented to the model. These are the *flat* shape that
@@ -73,6 +74,34 @@ export type ScheduleFollowupArgs = z.infer<typeof ScheduleFollowupArgs>;
 // -----------------------------------------------------------------------------
 
 import type { CactusLMTool } from 'cactus-react-native';
+
+/**
+ * Constrained-decoding fallback. Per build plan §3 — "if function-calling
+ * produces malformed JSON >30% of the time on real prompts, fall back to
+ * constrained decoding with two tools instead of four."
+ *
+ * `pickToolSet({ recentFailureRate })` returns the appropriate slice:
+ *   - rate ≤ 0.30 → full 4-tool surface (TOOLS)
+ *   - rate >  0.30 → record_vitals + recommend_action only (TOOLS_MINIMAL)
+ *
+ * Failure rate is tracked client-side in `recordToolDecodeOutcome` (in-memory;
+ * persist to secure-store if you want survival across launches). The screens
+ * call `pickToolSet` immediately before `Gemma4Engine.infer`.
+ */
+const FAILURE_THRESHOLD = 0.30;
+const WINDOW = 10; // running window of the last N inferences
+const recent: boolean[] = [];
+
+export function recordToolDecodeOutcome(succeeded: boolean): void {
+  recent.push(succeeded);
+  if (recent.length > WINDOW) recent.shift();
+}
+
+export function recentFailureRate(): number {
+  if (recent.length === 0) return 0;
+  const failed = recent.filter((r) => !r).length;
+  return failed / recent.length;
+}
 
 export const TOOLS: CactusLMTool[] = [
   {
@@ -175,6 +204,24 @@ export const TOOLS: CactusLMTool[] = [
   },
 ];
 
+/**
+ * Minimal tool surface for constrained-decoding fallback (2 tools, not 4).
+ * Same shapes as the full set — the model just has fewer choices to confuse.
+ */
+export const TOOLS_MINIMAL: CactusLMTool[] = TOOLS.filter(
+  (t) => t.name === 'record_vitals' || t.name === 'recommend_action'
+);
+
+/**
+ * Returns the right tool set for the current run, based on the recent decode
+ * failure rate. Call this at the top of every inference path.
+ */
+export function pickToolSet(): { tools: CactusLMTool[]; minimal: boolean } {
+  const rate = recentFailureRate();
+  if (rate > FAILURE_THRESHOLD) return { tools: TOOLS_MINIMAL, minimal: true };
+  return { tools: TOOLS, minimal: false };
+}
+
 // -----------------------------------------------------------------------------
 // Handler dispatch
 // -----------------------------------------------------------------------------
@@ -246,12 +293,18 @@ export async function applyToolCalls(args: {
         case 'schedule_followup': {
           const parsed = ScheduleFollowupArgs.parse(call.arguments);
           const due = new Date(Date.now() + parsed.days_from_now * 86400_000).toISOString();
-          await createFollowup({
+          const followup = await createFollowup({
             visit_id: args.visitId,
             patient_name: parsed.patient_name,
             due_at: due,
             reason: parsed.reason,
           });
+          await scheduleFollowupNotification({
+            followupId: followup.id,
+            patientName: parsed.patient_name,
+            whenIso: due,
+            reason: parsed.reason,
+          }).catch(() => undefined);
           out.push({ tool: 'schedule_followup', ok: true });
           break;
         }

@@ -1,0 +1,98 @@
+English Voice-Over Script — CHW Companion
+==========================================
+
+Tone: calm, low-key, BBC-documentary. Mid-30s female, neutral mid-Atlantic
+or West African English. Not US-broadcast. Not breathy. The video is not
+selling — it's explaining.
+
+The English VO covers 1:25–2:52 (87 seconds, ~190 words). The 0:00–1:25
+opening is in Hausa with burned-in English subs; see `vo-hausa.txt`.
+
+================================================================================
+SEGMENT 1 — 1:25–1:38 (13s) — TECH CREDIBILITY
+================================================================================
+
+  This is Gemma 4. Open weights. One hundred and forty languages. Audio,
+  vision, and text — in one forward pass. Running on the device.
+
+  Word count: 24
+  Notes: "Gemma 4" — say it like "gem-uh four." Do NOT say "Gemini." Pause
+  briefly after each clause; let the architecture diagram breathe.
+
+================================================================================
+SEGMENT 2 — 1:38–1:55 (17s) — THE MOAT
+================================================================================
+
+  A cloud API can't help Aisha. There's no signal in her village.
+  Nigerian law says patient data can't leave the country. And the API
+  fees alone would exceed her training budget.
+
+  Word count: 35
+  Notes: This is the strongest 17 seconds of the video. Pace it carefully.
+  The "and" at the start of the fourth sentence is doing real work — pause
+  before it so the audience hears the third reason as a separate punch.
+
+================================================================================
+SEGMENT 3 — 1:55–2:10 (15s) — CLOSURE FOR FATIMA
+================================================================================
+
+  When Aisha gets back to town, the visit syncs. The hospital in Kano
+  knows Fatima is coming.
+
+  Word count: 19
+  Notes: First mention of Kano (KAH-no). Drop slightly on "is coming" so
+  it feels resolved, not breathless.
+
+================================================================================
+SEGMENT 4 — 2:10–2:25 (15s) — SCALE
+================================================================================
+
+  Two hundred thousand community health workers in Africa. One-point-
+  eight billion people more than two hours from a hospital.
+
+  Word count: 24
+  Notes: Numbers are the load-bearing words. Slow down on "two hundred
+  thousand" and on "one-point-eight billion." Music builds here — the VO
+  should still cut through.
+
+================================================================================
+SEGMENT 5 — 2:25–2:40 (15s) — UNIVERSALITY
+================================================================================
+
+  Gemma 4 speaks one hundred and forty languages. Hausa today. Swahili,
+  Quechua, Bambara — next week.
+
+  Word count: 21
+  Notes: The four language names should each land — give them micro-
+  pauses. "Quechua" is "KEH-chuh-wah." "Bambara" is "bahm-BAH-rah."
+
+================================================================================
+SEGMENT 6 — 2:40–2:52 (12s) — HEART
+================================================================================
+
+  Aisha told us something we won't forget. "Now," she said, "I don't
+  have to guess."
+
+  Word count: 17
+  Notes: The shift from third person to direct quote is the emotional
+  pivot. After "told us something we won't forget," pause for two beats
+  before "Now." The quote should sound spoken, not announced — closer to
+  a sigh than a declaration.
+
+================================================================================
+CLOSING — 2:52–3:00 (8s)
+================================================================================
+
+  [No VO. Single piano note. On-screen card reads: "CHW Companion. A
+  midwife in every pocket. Built with Gemma. Apache 2.0."]
+
+================================================================================
+
+TOTAL ENGLISH VO RUNTIME: ~87 seconds across 6 segments
+TOTAL ENGLISH WORD COUNT: ~140
+
+DELIVERABLES
+- /03-VIDEO/vo/vo-english.wav (single file or 6 numbered segments)
+- 48 kHz / 24-bit / mono / -23 LUFS integrated (broadcast standard)
+
+================================================================================

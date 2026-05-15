@@ -1,0 +1,118 @@
+Hausa Voice-Over Script — CHW Companion
+========================================
+
+For the Fiverr seller: this is the full Hausa VO. Six numbered lines, total
+runtime ~80 seconds including the pauses between lines (3–4 s gaps so the
+editor can match them to the storyboard). Documentary tone — warm, calm,
+female, age 25–45. Not announcer, not commercial. Take a breath between
+sentences; do not rush.
+
+> **For the user (you, before posting the gig):** I am not a native Hausa
+> speaker. The orthography below is academic standard Hausa (Latin
+> transliteration of Boko script). Phrases like names of facilities and
+> medical terms should be reviewed by the seller before recording — they are
+> the kind of thing where a non-native draft can sound stiff or slightly off.
+> Ask them to flag and suggest natural alternatives; the meaning is what
+> matters, not literal word-for-word fidelity.
+
+================================================================================
+LINE 1 — 0:08–0:18 (10s)
+================================================================================
+
+  Sunana Aisha. Ni ce kaɗai mai aikin lafiya a ƙauye nan.
+
+  Phonetic guide (for non-Hausa speakers):
+  "soo-NA-na aa-EE-sha. nee chay ka-DEYE my eye-KEEN la-FEE-ya a kow-yay nahn."
+
+  English meaning:
+  "My name is Aisha. I am the only health worker in this village."
+
+================================================================================
+LINE 2 — 0:18–0:30 (12s)
+================================================================================
+
+  Yau zan ga Fatima. Ƙafafunta sun kumbura.
+
+  Phonetic:
+  "yow zahn gaa fa-TEE-ma. ka-fah-FOON-tah soon koom-BOO-rah."
+
+  English meaning:
+  "Today I'll see Fatima. Her ankles are swollen."
+
+================================================================================
+LINE 3 — 0:30–0:45 (15s)
+================================================================================
+
+  Babu hanyar yanar gizo a nan. Likita yana da nisan sa'o'i huɗu.
+
+  Phonetic:
+  "BAH-boo hah-N'YAR yah-NAR GEE-zo ah nahn. lee-KEE-ta ya-na da NEE-sahn sah-OH-ee HOO-doo."
+
+  English meaning:
+  "There is no internet here. The doctor is four hours away."
+
+  Note for seller: "hanyar yanar gizo" = "way of the world-web" = internet/signal.
+  An equally natural rendering is "Babu sigina" (no signal) — your choice.
+
+================================================================================
+LINE 4 — 0:45–1:10 (25s)
+================================================================================
+
+  Yanzu wayata ta na saurara. Tana gani. Tana tunani. Duk ba tare da intanet ba.
+
+  Phonetic:
+  "YAHN-zoo wah-YAH-tah tah nah SOW-rah-rah. tah-NAH GAH-nee. tah-NAH TOO-nah-nee. dook bah TAH-ray dah in-tah-NET bah."
+
+  English meaning:
+  "Now my phone listens. It sees. It thinks. All without the internet."
+
+  Note: this is the hero line. Pause briefly after each sentence — the editor
+  wants beat-on-beat alignment with the on-screen demo steps.
+
+================================================================================
+LINE 5 — 1:10–1:25 (15s)
+================================================================================
+
+  Tana kira ga kayan aiki da suka dace. Tana rubuta takarda da ta dace.
+  Tana magana da Hausa.
+
+  Phonetic:
+  "tah-NAH KEE-ra ga KAH-yan AH-ee-key da soo-kah DAH-chey. tah-NAH roo-BOO-tah tah-KAR-dah da tah DAH-chey. tah-NAH ma-GAH-nah da HOW-sa."
+
+  English meaning:
+  "It calls the right tools. It writes the right form. It speaks back — in
+  my language."
+
+  Note: "kayan aiki" literally "tools of work" — closest natural Hausa phrase
+  for "tools" in the LLM/function-call sense. If the seller prefers a more
+  technical word, e.g. "ayyuka" (functions), that's acceptable.
+
+================================================================================
+LINE 6 — (closing alternative line in case English VO is delayed) — optional
+================================================================================
+
+  Yanzu ba dole sai na yi tsammani.
+
+  Phonetic:
+  "YAHN-zoo bah DOH-lay sigh nah yee TSAH-mah-nee."
+
+  English meaning:
+  "Now I don't have to guess."
+
+================================================================================
+
+DELIVERY NOTES (paste these into the Fiverr brief)
+
+1. Six discrete .wav files (or one big .wav with chapter markers). 48 kHz / 24-bit, mono is fine.
+2. ≥2 takes per line so the editor can pick.
+3. No reverb, no compression — dry voice. The post-mix will add the room.
+4. Natural pace; pause between sentences as marked above.
+5. Pronunciation of "Fatima" should be the **Hausa** pronunciation (fa-TEE-ma)
+   not Arabic (FA-ti-ma) — confirm with the seller.
+
+DELIVERABLES BACK
+- /03-VIDEO/vo/vo-hausa-take1.wav
+- /03-VIDEO/vo/vo-hausa-take2.wav
+- /03-VIDEO/vo/seller-notes.txt (any corrections to the script the seller suggested)
+
+================================================================================

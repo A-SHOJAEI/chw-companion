@@ -43,6 +43,8 @@ export function PhotoCapture({ label, uri, onCaptured, onCleared }: Props) {
       <Pressable
         onPress={() => setOpen(true)}
         accessibilityRole="button"
+        accessibilityLabel={`${label} ${uri ? 'photo, captured' : 'photo, not yet captured'}`}
+        accessibilityHint={uri ? 'Tap to retake this photo.' : 'Tap to open the camera.'}
         style={({ pressed }) => [styles.tilePressable, pressed && { opacity: 0.85 }]}
       >
         {uri ? (
