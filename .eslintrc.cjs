@@ -22,6 +22,14 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     'no-console': ['warn', { allow: ['warn', 'error'] }],
+    // expo-asset's canonical pattern is `Asset.fromModule(require('./foo.png'))`.
+    // The asset bundler resolves the require at build time, so this is real
+    // and intentional, not a CommonJS leak.
+    '@typescript-eslint/no-require-imports': 'off',
+    // React 19's experimental `set-state-in-effect` rule is overly strict
+    // for the canonical async-load-on-mount pattern (the setState happens in
+    // an async continuation, not in the effect body synchronously).
+    'react-hooks/set-state-in-effect': 'off',
   },
   overrides: [
     {

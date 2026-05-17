@@ -8,7 +8,8 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint 'src/**/*.{ts,tsx}' 'App.tsx' '__tests__/**/*.ts'"
   },
   "dependencies": {
     "@op-engineering/op-sqlite": "^15.2.13",
@@ -35,6 +36,11 @@
   "devDependencies": {
     "@types/node": "^25.8.0",
     "@types/react": "~19.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.3",
+    "@typescript-eslint/parser": "^8.59.3",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "typescript": "~5.9.2",
     "vitest": "^4.1.6"
   },

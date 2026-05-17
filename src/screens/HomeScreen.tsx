@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { BigButton } from '../components/BigButton';
 import { colors, spacing, typography } from '../theme';
@@ -18,6 +18,15 @@ export function HomeScreen({ onStartVisit, onStartSampleVisit, onOpenHistory, mo
   const [unsynced, setUnsynced] = useState(0);
   const [lang, setLang] = useState<Language>(getLanguage());
 
+  const refresh = useCallback(async (): Promise<void> => {
+    const startOfWeek = new Date();
+    const day = startOfWeek.getDay();
+    startOfWeek.setDate(startOfWeek.getDate() - day);
+    startOfWeek.setHours(0, 0, 0, 0);
+    setCount(await countVisitsSince(startOfWeek.toISOString()));
+    setUnsynced(await countUnsyncedVisits());
+  }, []);
+
   useEffect(() => {
     void refresh();
     const offCreate = on('visit:created', () => void refresh());
@@ -26,16 +35,7 @@ export function HomeScreen({ onStartVisit, onStartSampleVisit, onOpenHistory, mo
       offCreate();
       offComplete();
     };
-  }, []);
-
-  async function refresh(): Promise<void> {
-    const startOfWeek = new Date();
-    const day = startOfWeek.getDay();
-    startOfWeek.setDate(startOfWeek.getDate() - day);
-    startOfWeek.setHours(0, 0, 0, 0);
-    setCount(await countVisitsSince(startOfWeek.toISOString()));
-    setUnsynced(await countUnsyncedVisits());
-  }
+  }, [refresh]);
 
   function toggleLang() {
     const next: Language = lang === 'ha' ? 'en' : 'ha';

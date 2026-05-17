@@ -11,7 +11,6 @@ import {
   createFollowup,
   addDangerSign,
   listVisits,
-  nowIso,
 } from './db';
 
 export async function seedDemoData(): Promise<{ visitsCreated: number; followupsCreated: number }> {

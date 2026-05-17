@@ -159,7 +159,14 @@ function renderRoute(state: AppState, dispatch: React.Dispatch<Action>): React.R
         />
       );
     case 'history':
-      return <HistoryScreen onBack={() => dispatch({ type: 'NAV', route: { name: 'home' } })} />;
+      return (
+        <HistoryScreen
+          onBack={() => dispatch({ type: 'NAV', route: { name: 'home' } })}
+          onOpenVisit={(id) =>
+            dispatch({ type: 'NAV', route: { name: 'result', visitId: id, wallMs: 0 } })
+          }
+        />
+      );
   }
 }
 
