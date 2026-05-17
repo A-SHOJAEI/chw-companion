@@ -58,7 +58,9 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
     setStatusLine(t('status.thinking'));
     const t0 = Date.now();
     try {
-      const systemPrompt = await loadSystemPrompt();
+      // Sample-visit mode uses the slim system prompt to stay within emulator
+      // memory; live visits on real devices use the full WHO-grounded prompt.
+      const systemPrompt = await loadSystemPrompt(useSampleData ? 'slim' : 'full');
       let audioBytes: number[];
       if (useSampleData) {
         audioBytes = await materializeWavBytes(require('../assets/sample-data/sample_audio.wav'));
