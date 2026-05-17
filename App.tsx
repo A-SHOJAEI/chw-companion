@@ -2,16 +2,20 @@ import { useEffect, useReducer, useState } from 'react';
 import { ActivityIndicator, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Gemma4Engine } from './src/lib/cactus';
+import { BrandMark } from './src/components/Icons';
 import { initDb } from './src/lib/db';
 import { on } from './src/lib/events';
+import { loadProfile, type ChwProfile } from './src/lib/profile';
 import { HomeScreen } from './src/screens/HomeScreen';
 import { VisitScreen } from './src/screens/VisitScreen';
 import { ResultScreen } from './src/screens/ResultScreen';
 import { HistoryScreen } from './src/screens/HistoryScreen';
-import { t } from './src/lib/i18n';
+import { WelcomeScreen } from './src/screens/WelcomeScreen';
+import { setLanguage, t } from './src/lib/i18n';
 import { colors, spacing, typography } from './src/theme';
 
 type Route =
+  | { name: 'welcome' }
   | { name: 'home' }
   | { name: 'visit'; sample: boolean }
   | { name: 'result'; visitId: string; wallMs: number }
@@ -23,6 +27,7 @@ interface AppState {
   modelError: string | null;
   modelLoadProgress: number;
   dbReady: boolean;
+  profileResolved: boolean;
 }
 
 type Action =
@@ -30,7 +35,8 @@ type Action =
   | { type: 'MODEL_READY' }
   | { type: 'MODEL_ERROR'; message: string }
   | { type: 'MODEL_PROGRESS'; fraction: number }
-  | { type: 'DB_READY' };
+  | { type: 'DB_READY' }
+  | { type: 'PROFILE_RESOLVED'; needsOnboarding: boolean };
 
 const initialState: AppState = {
   route: { name: 'home' },
@@ -38,6 +44,7 @@ const initialState: AppState = {
   modelError: null,
   modelLoadProgress: 0,
   dbReady: false,
+  profileResolved: false,
 };
 
 function reducer(state: AppState, action: Action): AppState {
@@ -52,6 +59,12 @@ function reducer(state: AppState, action: Action): AppState {
       return { ...state, modelLoadProgress: action.fraction };
     case 'DB_READY':
       return { ...state, dbReady: true };
+    case 'PROFILE_RESOLVED':
+      return {
+        ...state,
+        profileResolved: true,
+        route: action.needsOnboarding ? { name: 'welcome' } : { name: 'home' },
+      };
   }
 }
 
@@ -70,12 +83,12 @@ export default function App() {
         if (cancelled) return;
         dispatch({ type: 'DB_READY' });
 
+        const profile: ChwProfile | null = await loadProfile();
+        if (cancelled) return;
+        if (profile?.language) setLanguage(profile.language);
+        dispatch({ type: 'PROFILE_RESOLVED', needsOnboarding: !profile });
+
         setLoadingTitle(t('boot.loadingModel'));
-        // Model identification:
-        //  - Prefer a sideloaded absolute path on the device (set by the
-        //    `scripts/sideload-weights.sh` runbook for demos / judges).
-        //  - Otherwise fall back to the registry slug; the engine pulls the
-        //    weights from Hugging Face on first launch.
         const sideloadPath = '/data/data/org.chwcompanion.app/files/cactus/gemma-4-e4b-it';
         await Gemma4Engine.init({
           localModelPath: sideloadPath,
@@ -84,8 +97,6 @@ export default function App() {
           onDownloadProgress: (p) => {
             if (cancelled) return;
             dispatch({ type: 'MODEL_PROGRESS', fraction: p });
-            // Only show the download UI if the path actually downloads — the
-            // sideload-first branch resolves p=1.0 immediately.
             if (p < 1) {
               setLoadingTitle(`${t('boot.downloadingWeights')} · ${Math.round(p * 100)}%`);
               setLoadingHint(t('boot.firstLaunchHint'));
@@ -112,7 +123,10 @@ export default function App() {
   }, []);
 
   const screen = renderRoute(state, dispatch);
-  const showOverlay = !state.dbReady || (!state.modelReady && state.route.name === 'home');
+  const showOverlay =
+    !state.dbReady ||
+    !state.profileResolved ||
+    (!state.modelReady && state.route.name === 'home');
 
   return (
     <SafeAreaProvider>
@@ -120,6 +134,7 @@ export default function App() {
       <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
         {showOverlay ? (
           <View style={styles.loadingOverlay}>
+            <BrandMark size={88} />
             <Text style={styles.loadingBrand}>{t('app.name')}</Text>
             <Text style={styles.loadingTag}>{t('app.tagline')}</Text>
             <ActivityIndicator size="large" color={colors.terracotta} style={styles.loadingSpinner} />
@@ -138,6 +153,12 @@ export default function App() {
 
 function renderRoute(state: AppState, dispatch: React.Dispatch<Action>): React.ReactElement {
   switch (state.route.name) {
+    case 'welcome':
+      return (
+        <WelcomeScreen
+          onComplete={() => dispatch({ type: 'NAV', route: { name: 'home' } })}
+        />
+      );
     case 'home':
       return (
         <HomeScreen
@@ -192,8 +213,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     zIndex: 10,
     paddingHorizontal: spacing.xl,
+    gap: spacing.xs,
   },
-  loadingBrand: { ...typography.display, color: colors.terracotta, marginBottom: spacing.xs },
+  loadingBrand: {
+    ...typography.display,
+    color: colors.terracotta,
+    marginTop: spacing.lg,
+  },
   loadingTag: { ...typography.body, color: colors.slate, marginBottom: spacing.xxl, fontStyle: 'italic' },
   loadingSpinner: { marginBottom: spacing.lg },
   loadingTitle: { ...typography.bodyLg, color: colors.deepIndigo, textAlign: 'center' },

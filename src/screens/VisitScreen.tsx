@@ -3,12 +3,13 @@ import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-nat
 import { BigButton } from '../components/BigButton';
 import { AudioRecorder } from '../components/AudioRecorder';
 import { PhotoCapture } from '../components/PhotoCapture';
+import { EyeIcon, MicIcon, SparkIcon } from '../components/Icons';
 import { colors, radii, spacing, typography } from '../theme';
 import { t } from '../lib/i18n';
 import { Gemma4Engine, materializeImage, materializeWav, materializeWavBytes, readBytes } from '../lib/cactus';
 import { loadSystemPrompt } from '../lib/prompts';
 import { pickToolSet, recordToolDecodeOutcome, startVisitAndApply } from '../lib/tools';
-import { useVisitMachine, canProceedToReason } from '../lib/visit-state';
+import { useVisitMachine, canProceedToReason, type VisitState } from '../lib/visit-state';
 
 interface Props {
   onResult: (visitId: string, wallMs: number) => void;
@@ -125,6 +126,7 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
 
       <Step
         index={1}
+        icon={<MicIcon size={20} color={colors.invertedText} />}
         title={t('visit.step1Title')}
         done={!!state.audioUri}
         active={state.step === 'listen'}
@@ -134,18 +136,25 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
             onCaptured={(uri, sec) => dispatch({ type: 'AUDIO_CAPTURED', uri, seconds: sec })}
           />
         ) : state.audioUri ? (
-          <Text style={styles.recap}>
-            {t('visit.recordingDone')} · {state.audioSeconds.toFixed(1)}s
-          </Text>
+          <View style={styles.audioRecap}>
+            <View style={styles.audioBars}>
+              {[14, 22, 18, 26, 12, 20, 16].map((h, i) => (
+                <View key={i} style={[styles.audioBar, { height: h }]} />
+              ))}
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.recap}>{t('visit.recordingDone')}</Text>
+              <Text style={styles.recapMeta}>{state.audioSeconds.toFixed(1)}s recorded</Text>
+            </View>
+          </View>
         ) : null}
       </Step>
 
       <Step
         index={2}
+        icon={<EyeIcon size={20} color={colors.invertedText} />}
         title={t('visit.step2Title')}
-        done={
-          !!state.photos.face && !!state.photos.ankle && !!state.photos.dipstick
-        }
+        done={photosComplete(state)}
         active={state.step === 'see'}
       >
         <View style={styles.photoRow}>
@@ -174,6 +183,7 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
 
       <Step
         index={3}
+        icon={<SparkIcon size={20} color={colors.invertedText} />}
         title={t('visit.step3Title')}
         done={state.step === 'result'}
         active={state.step === 'reason'}
@@ -189,12 +199,21 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
             </View>
           </View>
         ) : (
-          <BigButton
-            title={t('visit.reasonButton')}
-            onPress={() => void runInference()}
-            disabled={!canProceedToReason(state)}
-            variant="primary"
-          />
+          <>
+            {canProceedToReason(state) ? (
+              <View style={styles.readyRow}>
+                <Text style={styles.readyText}>
+                  1 voice note · {countCapturedPhotos(state)} photos · 4 tools
+                </Text>
+              </View>
+            ) : null}
+            <BigButton
+              title={t('visit.reasonButton')}
+              onPress={() => void runInference()}
+              disabled={!canProceedToReason(state)}
+              variant="primary"
+            />
+          </>
         )}
       </Step>
 
@@ -212,12 +231,14 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
 
 function Step({
   index,
+  icon,
   title,
   done,
   active,
   children,
 }: {
   index: number;
+  icon?: React.ReactNode;
   title: string;
   done: boolean;
   active: boolean;
@@ -227,13 +248,27 @@ function Step({
     <View style={[stepStyles.card, active && stepStyles.cardActive, done && stepStyles.cardDone]}>
       <View style={stepStyles.headerRow}>
         <View style={[stepStyles.dot, done && stepStyles.dotDone, active && stepStyles.dotActive]}>
-          <Text style={stepStyles.dotText}>{done ? '✓' : index}</Text>
+          {done ? (
+            <Text style={stepStyles.dotText}>✓</Text>
+          ) : active && icon ? (
+            icon
+          ) : (
+            <Text style={stepStyles.dotText}>{index}</Text>
+          )}
         </View>
         <Text style={stepStyles.title}>{title}</Text>
       </View>
       {(active || done) && children ? <View style={stepStyles.body}>{children}</View> : null}
     </View>
   );
+}
+
+function photosComplete(s: VisitState): boolean {
+  return !!s.photos.face && !!s.photos.ankle && !!s.photos.dipstick;
+}
+
+function countCapturedPhotos(s: VisitState): number {
+  return Object.values(s.photos).filter(Boolean).length;
 }
 
 const stepStyles = StyleSheet.create({
@@ -274,7 +309,24 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   photoRow: { flexDirection: 'row', gap: spacing.sm },
-  recap: { ...typography.body, color: colors.okraGreen },
+  recap: { ...typography.label, color: colors.okraGreen, fontSize: 15 },
+  recapMeta: { ...typography.caption, color: colors.slate },
+  audioRecap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+    paddingVertical: spacing.xs,
+  },
+  audioBars: { flexDirection: 'row', alignItems: 'center', gap: 3 },
+  audioBar: { width: 3, backgroundColor: colors.okraGreen, borderRadius: 2 },
+  readyRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: spacing.xs,
+    marginBottom: spacing.sm,
+  },
+  readyText: { ...typography.caption, color: colors.slate, letterSpacing: 0.4 },
   thinkingRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, padding: spacing.lg },
   thinkingText: { ...typography.bodyLg, color: colors.deepIndigo },
   thinkingHint: { ...typography.caption, color: colors.slate, marginTop: 2 },

@@ -14,6 +14,31 @@ export type StringKey =
   // App-level
   | 'app.name'
   | 'app.tagline'
+  // Welcome / onboarding
+  | 'welcome.title'
+  | 'welcome.lead'
+  | 'welcome.point1Title'
+  | 'welcome.point1Body'
+  | 'welcome.point2Title'
+  | 'welcome.point2Body'
+  | 'welcome.point3Title'
+  | 'welcome.point3Body'
+  | 'welcome.nameLabel'
+  | 'welcome.namePlaceholder'
+  | 'welcome.continue'
+  | 'welcome.skipForNow'
+  // Home greeting
+  | 'home.greetingMorning'
+  | 'home.greetingAfternoon'
+  | 'home.greetingEvening'
+  | 'home.statusOffline'
+  | 'home.statusOnDevice'
+  | 'home.statusEncrypted'
+  | 'home.statusModelReady'
+  | 'home.tipLabel'
+  // Result detail
+  | 'result.whyTitle'
+  | 'result.whyHint'
   // Boot / loading
   | 'boot.openingDb'
   | 'boot.loadingModel'
@@ -88,6 +113,19 @@ const ha: Record<StringKey, string> = {
   'app.name': 'CHW Companion',
   'app.tagline': 'Likita a aljihu ɗaya',
 
+  'welcome.title': 'Maraba',
+  'welcome.lead': 'CHW Companion yana taimaka maka yanke shawara ta hanya mai sauri yayin ziyarar haihuwa — gaba ɗaya akan wayar, ba tare da intanet ba.',
+  'welcome.point1Title': 'Yana saurara kuma yana gani',
+  'welcome.point1Body': 'Magana cikin Hausa, ɗauki hotuna uku, sannan Gemma 4 zai ba ka shawarwarin asibiti.',
+  'welcome.point2Title': 'Yana aiki ko\'ina',
+  'welcome.point2Body': "Babu intanet, babu uwar garken da'a — duk yana faruwa a wannan wayar.",
+  'welcome.point3Title': 'Bayanan mara lafiya na zaman a wayar',
+  'welcome.point3Body': 'An ɓoye SQLite a kan na\'urar; ba bayanai da ke barin wayar har sai ka aika takarda.',
+  'welcome.nameLabel': 'Sunan ka',
+  'welcome.namePlaceholder': 'Misali: Aisha',
+  'welcome.continue': 'Ci gaba',
+  'welcome.skipForNow': 'Tsallake yanzu',
+
   'boot.openingDb': 'Ana buɗe bayanan da aka kiyaye',
   'boot.loadingModel': 'Ana sa Gemma 4 a kan na\'urar',
   'boot.downloadingWeights': 'Ana saukar da samfurin',
@@ -95,6 +133,14 @@ const ha: Record<StringKey, string> = {
   'boot.ready': 'A shirye',
 
   'home.today': 'Yau',
+  'home.greetingMorning': 'Ina kwana',
+  'home.greetingAfternoon': 'Ina yini',
+  'home.greetingEvening': 'Ina yamma',
+  'home.statusOffline': 'Babu intanet',
+  'home.statusOnDevice': 'A kan na\'urar',
+  'home.statusEncrypted': 'Bayanai a ɓoye',
+  'home.statusModelReady': 'Gemma 4 a shirye',
+  'home.tipLabel': 'Tunatarwa',
   'home.visitsThisWeek': 'Ziyarce-ziyarcen wannan sati',
   'home.startVisit': 'Fara Ziyara',
   'home.tryDemo': 'Misalin Ziyara',
@@ -126,6 +172,8 @@ const ha: Record<StringKey, string> = {
   'result.watchSub': 'Sake gani da wuri',
   'result.clear': 'LAFIYA',
   'result.clearSub': 'Babu alamar hatsari yanzu',
+  'result.whyTitle': 'Me yasa wannan?',
+  'result.whyHint': 'Alamomin da aka samu da kuma sashin ka\'idar WHO',
   'result.recommendation': 'Shawarwari',
   'result.facility': 'Wurin kulawa',
   'result.timeframe': 'A cikin (sa\'o\'i)',
@@ -162,6 +210,19 @@ const en: Record<StringKey, string> = {
   'app.name': 'CHW Companion',
   'app.tagline': 'A midwife in every pocket',
 
+  'welcome.title': 'Welcome',
+  'welcome.lead': 'CHW Companion helps you reach a fast clinical decision during a maternal home visit — fully on your phone, no internet needed.',
+  'welcome.point1Title': 'It listens and it sees',
+  'welcome.point1Body': 'Speak in Hausa or English, capture three photos, and Gemma 4 returns a structured triage decision in under a minute.',
+  'welcome.point2Title': 'Works anywhere',
+  'welcome.point2Body': 'No signal, no cloud account — everything happens on this device.',
+  'welcome.point3Title': 'Patient data stays here',
+  'welcome.point3Body': 'Encrypted SQLite on-device; nothing leaves the phone until you choose to print a paper handoff.',
+  'welcome.nameLabel': 'Your name',
+  'welcome.namePlaceholder': 'e.g. Aisha',
+  'welcome.continue': 'Continue',
+  'welcome.skipForNow': 'Skip for now',
+
   'boot.openingDb': 'Opening encrypted records',
   'boot.loadingModel': 'Loading Gemma 4 on this device',
   'boot.downloadingWeights': 'Downloading model',
@@ -169,6 +230,14 @@ const en: Record<StringKey, string> = {
   'boot.ready': 'Ready',
 
   'home.today': 'Today',
+  'home.greetingMorning': 'Good morning',
+  'home.greetingAfternoon': 'Good afternoon',
+  'home.greetingEvening': 'Good evening',
+  'home.statusOffline': 'Offline',
+  'home.statusOnDevice': 'On device',
+  'home.statusEncrypted': 'Encrypted',
+  'home.statusModelReady': 'Gemma 4 ready',
+  'home.tipLabel': 'Field tip',
   'home.visitsThisWeek': 'Visits this week',
   'home.startVisit': 'Start a visit',
   'home.tryDemo': 'Sample visit',
@@ -200,6 +269,8 @@ const en: Record<StringKey, string> = {
   'result.watchSub': 'Recheck soon',
   'result.clear': 'CLEAR',
   'result.clearSub': 'No danger signs',
+  'result.whyTitle': 'Why this severity?',
+  'result.whyHint': 'The findings and the matching WHO protocol section',
   'result.recommendation': 'Recommendation',
   'result.facility': 'Facility',
   'result.timeframe': 'Within (hours)',

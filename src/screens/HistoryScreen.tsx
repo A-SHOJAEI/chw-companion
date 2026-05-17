@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { BigButton } from '../components/BigButton';
+import { ClipboardIllustration } from '../components/Icons';
 import { colors, radii, spacing, typography, severityColors } from '../theme';
 import { t } from '../lib/i18n';
 import { listVisits, type VisitRow } from '../lib/db';
@@ -42,7 +43,7 @@ export function HistoryScreen({ onBack, onOpenVisit }: Props) {
       </Pressable>
       {rows.length === 0 ? (
         <View style={styles.emptyWrap}>
-          <Text style={styles.emptyIcon}>·</Text>
+          <ClipboardIllustration size={140} />
           <Text style={styles.emptyTitle}>{t('history.empty')}</Text>
           <Text style={styles.emptyHint}>{t('history.emptyHint')}</Text>
         </View>
@@ -97,9 +98,8 @@ function severityBg(sev: VisitRow['severity']): { backgroundColor: string } {
 const styles = StyleSheet.create({
   wrap: { flex: 1, padding: spacing.lg, paddingTop: spacing.xxxl, backgroundColor: colors.bone },
   heading: { ...typography.display, color: colors.deepIndigo, marginBottom: spacing.lg },
-  emptyWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: spacing.xs },
-  emptyIcon: { fontSize: 56, color: colors.divider, marginBottom: spacing.md },
-  emptyTitle: { ...typography.heading, color: colors.deepIndigo },
+  emptyWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: spacing.sm },
+  emptyTitle: { ...typography.heading, color: colors.deepIndigo, marginTop: spacing.lg },
   emptyHint: { ...typography.body, color: colors.slate, textAlign: 'center', maxWidth: 280 },
   row: {
     flexDirection: 'row',

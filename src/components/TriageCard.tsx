@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { colors, radii, spacing, typography } from '../theme';
 import { t } from '../lib/i18n';
 import type { DangerSignRow, VisitRow } from '../lib/db';
+import { CalendarIcon, DropIcon, FootIcon, HeartIcon } from './Icons';
 
 interface Props {
   visit: VisitRow;
@@ -10,34 +11,55 @@ interface Props {
 
 export function TriageCard({ visit, dangerSigns }: Props) {
   const knownPatient = visit.patient_name && visit.patient_name !== 'Pending';
-  const hasVitals = visit.bp_sys != null || visit.bp_dia != null ||
-    visit.edema_grade != null || visit.proteinuria != null;
+  const hasVitals =
+    visit.bp_sys != null ||
+    visit.bp_dia != null ||
+    visit.edema_grade != null ||
+    visit.proteinuria != null;
 
   return (
     <View style={styles.card}>
-      <Row
-        label={t('result.patient')}
-        value={knownPatient ? visit.patient_name : t('result.unknownPatient')}
-        muted={!knownPatient}
-      />
-      {visit.gestational_age_weeks != null && visit.gestational_age_weeks > 0 ? (
-        <Row label="GA" value={`${visit.gestational_age_weeks} ${t('result.gaWeeks')}`} />
-      ) : null}
+      <View style={styles.headerRow}>
+        <Text style={styles.patientName}>
+          {knownPatient ? visit.patient_name : t('result.unknownPatient')}
+        </Text>
+        {visit.gestational_age_weeks != null && visit.gestational_age_weeks > 0 ? (
+          <View style={styles.gaPill}>
+            <CalendarIcon size={14} color={colors.deepIndigo} />
+            <Text style={styles.gaText}>
+              {visit.gestational_age_weeks} {t('result.gaWeeks')}
+            </Text>
+          </View>
+        ) : null}
+      </View>
 
       <View style={styles.divider} />
       <Text style={styles.section}>{t('result.vitals')}</Text>
       {hasVitals ? (
-        <>
+        <View style={styles.vitalsGrid}>
           {visit.bp_sys != null || visit.bp_dia != null ? (
-            <Row label="BP" value={formatBP(visit.bp_sys, visit.bp_dia)} />
+            <Vital
+              icon={<HeartIcon size={18} color={colors.terracotta} />}
+              label="BP"
+              value={formatBP(visit.bp_sys, visit.bp_dia)}
+              unit="mmHg"
+            />
           ) : null}
           {visit.edema_grade ? (
-            <Row label="Edema" value={visit.edema_grade} />
+            <Vital
+              icon={<FootIcon size={18} color={colors.terracotta} />}
+              label="Edema"
+              value={visit.edema_grade}
+            />
           ) : null}
           {visit.proteinuria ? (
-            <Row label="Proteinuria" value={visit.proteinuria} />
+            <Vital
+              icon={<DropIcon size={18} color={colors.terracotta} />}
+              label="Proteinuria"
+              value={visit.proteinuria}
+            />
           ) : null}
-        </>
+        </View>
       ) : (
         <Text style={styles.empty}>{t('result.noVitals')}</Text>
       )}
@@ -66,25 +88,48 @@ export function TriageCard({ visit, dangerSigns }: Props) {
         <>
           <Text style={styles.action}>{visit.recommended_action}</Text>
           <View style={styles.metaRow}>
-            <Row
-              label={t('result.facility')}
-              value={visit.recommended_facility ?? '—'}
-              compact
-            />
-            <Row
-              label={t('result.timeframe')}
-              value={
-                visit.recommended_timeframe_hours != null
-                  ? `${visit.recommended_timeframe_hours}`
-                  : '—'
-              }
-              compact
-            />
+            {visit.recommended_facility ? (
+              <View style={styles.metaChip}>
+                <Text style={styles.metaChipLabel}>{t('result.facility')}</Text>
+                <Text style={styles.metaChipValue}>{visit.recommended_facility}</Text>
+              </View>
+            ) : null}
+            {visit.recommended_timeframe_hours != null ? (
+              <View style={styles.metaChip}>
+                <Text style={styles.metaChipLabel}>{t('result.timeframe')}</Text>
+                <Text style={styles.metaChipValue}>
+                  {visit.recommended_timeframe_hours}h
+                </Text>
+              </View>
+            ) : null}
           </View>
         </>
       ) : (
         <Text style={styles.empty}>{t('result.noRecommendation')}</Text>
       )}
+    </View>
+  );
+}
+
+function Vital({
+  icon,
+  label,
+  value,
+  unit,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  unit?: string;
+}) {
+  return (
+    <View style={styles.vitalCell}>
+      <View style={styles.vitalIcon}>{icon}</View>
+      <Text style={styles.vitalLabel}>{label}</Text>
+      <Text style={styles.vitalValue}>
+        {value}
+        {unit ? <Text style={styles.vitalUnit}> {unit}</Text> : null}
+      </Text>
     </View>
   );
 }
@@ -102,31 +147,7 @@ function dotColor(sev: 'info' | 'warning' | 'urgent'): { backgroundColor: string
 
 function formatBP(sys: number | null, dia: number | null): string {
   if (sys == null && dia == null) return '—';
-  return `${sys ?? '?'} / ${dia ?? '?'} mmHg`;
-}
-
-function Row({
-  label,
-  value,
-  compact,
-  muted,
-}: {
-  label: string;
-  value: string;
-  compact?: boolean;
-  muted?: boolean;
-}) {
-  return (
-    <View style={[styles.row, compact && styles.rowCompact]}>
-      <Text style={styles.rowLabel}>{label}</Text>
-      <Text
-        style={[styles.rowValue, muted && styles.rowValueMuted]}
-        numberOfLines={2}
-      >
-        {value}
-      </Text>
-    </View>
-  );
+  return `${sys ?? '?'}/${dia ?? '?'}`;
 }
 
 const styles = StyleSheet.create({
@@ -136,6 +157,18 @@ const styles = StyleSheet.create({
     borderRadius: radii.lg,
     gap: spacing.xs,
   },
+  headerRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, flexWrap: 'wrap' },
+  patientName: { ...typography.heading, color: colors.deepIndigo, flex: 1, fontSize: 20 },
+  gaPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: colors.bone,
+    borderRadius: 999,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  gaText: { ...typography.caption, color: colors.deepIndigo, fontWeight: '500' },
   divider: {
     height: 1,
     backgroundColor: colors.divider,
@@ -147,13 +180,32 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xs,
     letterSpacing: 1,
     textTransform: 'uppercase',
-    fontSize: 12,
+    fontSize: 11,
   },
-  row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
-  rowCompact: { flex: 1 },
-  rowLabel: { ...typography.body, color: colors.slate, marginRight: spacing.md },
-  rowValue: { ...typography.body, color: colors.deepIndigo, flexShrink: 1, textAlign: 'right' },
-  rowValueMuted: { color: colors.slate, fontStyle: 'italic' },
+  vitalsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
+    marginTop: 2,
+  },
+  vitalCell: {
+    flexBasis: '31%',
+    flexGrow: 1,
+    backgroundColor: colors.bone,
+    borderRadius: 10,
+    padding: spacing.sm,
+    gap: 2,
+  },
+  vitalIcon: { marginBottom: 2 },
+  vitalLabel: {
+    ...typography.caption,
+    color: colors.slate,
+    fontSize: 11,
+    textTransform: 'uppercase',
+    letterSpacing: 0.6,
+  },
+  vitalValue: { ...typography.heading, color: colors.deepIndigo, fontSize: 16 },
+  vitalUnit: { ...typography.caption, color: colors.slate, fontSize: 11 },
   signRow: { flexDirection: 'row', alignItems: 'flex-start', gap: spacing.sm, marginVertical: 4 },
   dot: { width: 10, height: 10, borderRadius: 5, marginTop: 7 },
   signText: { ...typography.body, color: colors.deepIndigo },
@@ -166,5 +218,20 @@ const styles = StyleSheet.create({
   },
   action: { ...typography.bodyLg, color: colors.deepIndigo, lineHeight: 26 },
   empty: { ...typography.body, color: colors.slate, fontStyle: 'italic' },
-  metaRow: { flexDirection: 'row', gap: spacing.lg, marginTop: spacing.sm },
+  metaRow: { flexDirection: 'row', gap: spacing.sm, marginTop: spacing.sm, flexWrap: 'wrap' },
+  metaChip: {
+    backgroundColor: colors.bone,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    gap: 2,
+  },
+  metaChipLabel: {
+    ...typography.caption,
+    color: colors.slate,
+    fontSize: 10,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
+  },
+  metaChipValue: { ...typography.label, color: colors.deepIndigo, fontSize: 13 },
 });
