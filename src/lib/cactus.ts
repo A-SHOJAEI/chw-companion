@@ -176,22 +176,46 @@ export const Gemma4Engine = new Gemma4EngineImpl();
 // Asset helpers — bundle a WAV/JPEG via require() and surface what infer() needs
 // -----------------------------------------------------------------------------
 
+/**
+ * In Metro-dev mode, expo-asset materializes a require()'d asset to a
+ * `file://` URI under cacheDirectory. In a release/embedded-bundle build the
+ * `localUri` can be `asset://...` (Android resource) which the Cactus native
+ * lib cannot mmap — it needs a real filesystem path. So when the URI isn't
+ * already `file://`, we copy the asset into cacheDirectory and hand that path
+ * back instead.
+ */
+async function ensureFilesystemPath(asset: Asset, suggestedExt: string): Promise<string> {
+  if (!asset.localUri) throw new Error('Asset materialization failed (no localUri)');
+  if (asset.localUri.startsWith('file://')) return asset.localUri.slice('file://'.length);
+
+  const ext = (asset.type || suggestedExt).replace(/^\./, '');
+  const hash = asset.hash ?? `mod${asset.name}`;
+  const dest = `${FileSystem.cacheDirectory}cactus-asset-${hash}.${ext}`;
+  const info = await FileSystem.getInfoAsync(dest).catch(() => ({ exists: false }));
+  if (!info.exists) {
+    await FileSystem.copyAsync({ from: asset.localUri, to: dest });
+  }
+  return dest.startsWith('file://') ? dest.slice('file://'.length) : dest;
+}
+
 /** Resolve a require()'d image asset to an absolute filesystem path. */
 export async function materializeImage(mod: number): Promise<string> {
   const asset = Asset.fromModule(mod);
   await asset.downloadAsync();
-  if (!asset.localUri) throw new Error('Image asset materialization failed');
-  return asset.localUri.startsWith('file://')
-    ? asset.localUri.slice('file://'.length)
-    : asset.localUri;
+  return ensureFilesystemPath(asset, 'jpg');
 }
 
 /** Resolve a require()'d WAV asset and read it as a JS number[] of bytes. */
 export async function materializeWavBytes(mod: number): Promise<number[]> {
+  const path = await materializeWav(mod);
+  return readBytes(path);
+}
+
+/** Resolve a require()'d WAV asset to a real filesystem path. */
+export async function materializeWav(mod: number): Promise<string> {
   const asset = Asset.fromModule(mod);
   await asset.downloadAsync();
-  if (!asset.localUri) throw new Error('WAV asset materialization failed');
-  return readBytes(asset.localUri);
+  return ensureFilesystemPath(asset, 'wav');
 }
 
 /** Read a file (any URI) as a number[] of bytes — used for live recordings too. */

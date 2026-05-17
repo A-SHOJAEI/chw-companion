@@ -5,7 +5,7 @@ import { AudioRecorder } from '../components/AudioRecorder';
 import { PhotoCapture } from '../components/PhotoCapture';
 import { colors, radii, spacing, typography } from '../theme';
 import { t } from '../lib/i18n';
-import { Gemma4Engine, materializeImage, materializeWavBytes, readBytes } from '../lib/cactus';
+import { Gemma4Engine, materializeImage, materializeWav, materializeWavBytes, readBytes } from '../lib/cactus';
 import { loadSystemPrompt } from '../lib/prompts';
 import { pickToolSet, recordToolDecodeOutcome, startVisitAndApply } from '../lib/tools';
 import { useVisitMachine, canProceedToReason } from '../lib/visit-state';
@@ -27,7 +27,9 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
     void prepareSample();
     async function prepareSample(): Promise<void> {
       try {
-        const audioUri = await materializeImage(require('../assets/sample-data/sample_audio.wav'));
+        // Use materializeWav for the audio path so the helper copies the
+        // bundled asset into cacheDirectory before we read it.
+        const audioUri = await materializeWav(require('../assets/sample-data/sample_audio.wav'));
         const sampleImage = await materializeImage(require('../assets/sample-data/sample_ankle.jpg'));
         dispatch({ type: 'AUDIO_CAPTURED', uri: audioUri, seconds: 5 });
         dispatch({ type: 'PHOTO_CAPTURED', slot: 'face', uri: sampleImage });
@@ -41,6 +43,14 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
       }
     }
   }, [useSampleData, dispatch]);
+
+  // Auto-advance from `see` → `reason` once all photos + audio are captured.
+  // Without this, Step 3's Reason button never appears.
+  useEffect(() => {
+    if (state.step === 'see' && canProceedToReason(state)) {
+      dispatch({ type: 'PROCEED_TO_REASON' });
+    }
+  }, [state, dispatch]);
 
   const runInference = useCallback(async () => {
     if (busy) return;

@@ -99,14 +99,26 @@ fi
 
 # 7) chown + SELinux relabel — required: the push happens as root but the
 #    app process runs as the per-app uid (e.g. u0_a192) with per-app SELinux
-#    categories. Without these two steps, the native lib hits "Cannot open
-#    file for mapping" or SELinux denies the read.
+#    MCS categories. Without these three steps, the native lib hits "Cannot
+#    open file for mapping" or SELinux denies the read.
+#
+#    Important: restorecon -R does NOT reset MCS categories on already-labeled
+#    files. If you're MOVING files from another app's dir (e.g. com.cactusspike.chw
+#    → org.chwcompanion.app), the files keep the OLD per-uid category and
+#    SELinux denies reads. chcon -R forces the new category to override.
 APP_UID=$(adb shell stat -c '%u' "/data/data/${PKG}" | tr -d '\r')
 APP_GID=$(adb shell stat -c '%g' "/data/data/${PKG}" | tr -d '\r')
 echo "[sideload] chown -R ${APP_UID}:${APP_GID} ..."
 adb shell chown -R "${APP_UID}:${APP_GID}" "${DEVICE_DIR}"
-echo "[sideload] restorecon -R ..."
-adb shell restorecon -R "${DEVICE_DIR}"
+echo "[sideload] restorecon -RF ..."
+adb shell restorecon -RF "${DEVICE_DIR}"
+# Force MCS category to match the app's process context — restorecon won't
+# rewrite existing MCS labels in all cases.
+DIR_CTX=$(adb shell stat -c '%C' "/data/data/${PKG}/files" 2>/dev/null | tr -d '\r')
+if [ -n "$DIR_CTX" ]; then
+  echo "[sideload] chcon -R ${DIR_CTX} ..."
+  adb shell chcon -R "${DIR_CTX}" "${DEVICE_DIR}"
+fi
 
 # 8) Smoke check
 SIZE_MB=$(adb shell du -sm "${DEVICE_DIR}" | awk '{print $1}')
