@@ -33,7 +33,7 @@ mutually exclusive on a single submission.
 > "Your Writeup should not exceed 1,500 words. Submissions over this limit may
 > be subject to penalty."
 
-**Our writeup:** `docs/writeup.md` — **1,455 words** (verify with `wc -w`).
+**Our writeup:** `docs/writeup.md` — **1,491 words** (verify with `wc -w`).
 
 ## 3. Video — YouTube + Public
 
@@ -57,8 +57,8 @@ the deadline.
 > validate the authenticity of your project. Your code repository should be
 > **publicly accessible and not require a login or paywall**."
 
-**Action:** Create `github.com/{{GH}}/chw-companion` as **Public**. Verify with
-`curl -sI https://github.com/{{GH}}/chw-companion | head -1` → should return
+**Action:** Create `github.com/A-SHOJAEI/chw-companion` as **Public**. Verify with
+`curl -sI https://github.com/A-SHOJAEI/chw-companion | head -1` → should return
 `200`.
 
 ## 5. Live demo — URL or attached files

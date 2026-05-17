@@ -58,7 +58,7 @@ We are not Nigerian midwives. Every clinical threshold in the system prompt is c
 ## How to run
 
 ```bash
-git clone https://github.com/{{GH}}/chw-companion
+git clone https://github.com/A-SHOJAEI/chw-companion
 cd chw-companion && npm install && npx expo prebuild --platform android
 npx expo run:android        # Android 12+ device with ≥ 8 GB RAM
 # or for judges: scripts/sideload-weights.sh after a debug APK install
@@ -70,10 +70,10 @@ The browser fallback at `chwcompanion.pages.dev` requires no install — open it
 
 ## Links
 
-- **Code:** <https://github.com/{{GH}}/chw-companion> (Apache 2.0)
+- **Code:** <https://github.com/A-SHOJAEI/chw-companion> (Apache 2.0)
 - **Video:** <https://youtube.com/watch?v={{YTID}}>
 - **Live demo:** <https://chwcompanion.pages.dev>
-- **APK:** <https://github.com/{{GH}}/chw-companion/releases/tag/v0.1.0>
+- **APK:** <https://github.com/A-SHOJAEI/chw-companion/releases/tag/v0.1.0>
 - **Model:** <https://huggingface.co/google/gemma-4-E4B-it>
 - **WHO MCPC source:** <https://www.who.int/publications/i/item/9789241565493>
 

@@ -19,23 +19,13 @@ These are async / external-service waits. Kick them off in the first hour so the
 ### 0.2 — Create the public GitHub repo + push
 
 ```bash
-gh repo create {{GH}}/chw-companion --public --license=Apache-2.0 --description "A midwife in every pocket — offline multimodal maternal-health triage with Gemma 4." --homepage https://chwcompanion.pages.dev
+gh repo create A-SHOJAEI/chw-companion --public --license=Apache-2.0 --description "A midwife in every pocket — offline multimodal maternal-health triage with Gemma 4." --homepage https://chwcompanion.pages.dev
 cd /Users/alireza/Desktop/Hackathon/chw-companion
-git remote add origin https://github.com/{{GH}}/chw-companion.git
+git remote add origin https://github.com/A-SHOJAEI/chw-companion.git
 git push -u origin master
 ```
 
-**Verify:** `curl -sI https://github.com/{{GH}}/chw-companion | head -1` returns `200`.
-
-### 0.3 — Swap the `{{GH}}` placeholder for your real handle in every doc
-
-Once you know it:
-
-```bash
-cd /Users/alireza/Desktop/Hackathon/chw-companion
-grep -rl '{{GH}}' --include='*.md' | xargs sed -i '' 's/{{GH}}/<your-handle>/g'
-git add -A && git commit -m "docs: fill in github handle" && git push
-```
+**Verify:** `curl -sI https://github.com/A-SHOJAEI/chw-companion | head -1` returns `200`.
 
 ---
 
@@ -69,7 +59,7 @@ gh release create v0.1.0 \
 
 **Backup plan:** if signing fails, ship the **debug** APK from `app/build/outputs/apk/debug/app-debug.apk`. Judges will sideload either; mention "debug build" in the release notes.
 
-**Verify:** `curl -sIL https://github.com/{{GH}}/chw-companion/releases/download/v0.1.0/chw-companion-v0.1.0.apk | head -1` returns `200`.
+**Verify:** `curl -sIL https://github.com/A-SHOJAEI/chw-companion/releases/download/v0.1.0/chw-companion-v0.1.0.apk | head -1` returns `200`.
 
 ### 1.2 — Deploy the web demo (~15 min)
 
@@ -154,19 +144,19 @@ Open the competition page, click **Submit Writeup**.
 | **Cover image** | Upload `docs/visual/cover-1280x720.png` |
 | **Gallery images** | Upload `docs/visual/architecture-1920x1080.png` and 1–2 of your best UI screenshots |
 | **Video URL** | Your YouTube link (Public) |
-| **Code repo URL** | `https://github.com/<your-handle>/chw-companion` |
+| **Code repo URL** | `https://github.com/A-SHOJAEI/chw-companion` |
 | **Live demo URL** | Your deployed web demo URL **or** attach the APK as Files |
 
 **Pre-flight checks** (run these in an incognito browser before clicking Submit):
 
 ```bash
 # 1) Repo public
-curl -sI https://github.com/<your-handle>/chw-companion | head -1
+curl -sI https://github.com/A-SHOJAEI/chw-companion | head -1
 # 2) APK downloadable
-curl -sIL https://github.com/<your-handle>/chw-companion/releases/download/v0.1.0/<apk-name> | head -1
-# 3) Web demo
-curl -sI <deployed-url> | head -1
-# 4) YouTube public
+curl -sIL https://github.com/A-SHOJAEI/chw-companion/releases/download/v0.1.0/chw-companion-v0.1.0.apk | head -1
+# 3) Web demo (substitute the URL Cloudflare/Vercel returns)
+curl -sIL <deployed-url> | head -1
+# 4) YouTube public (substitute your video URL)
 curl -sIL <youtube-url> | head -1
 ```
 

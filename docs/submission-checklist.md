@@ -27,20 +27,20 @@ For the time-boxed plan see [`docs/FINAL_SUBMISSION_24H.md`](FINAL_SUBMISSION_24
 
 ## Verification probes (run before clicking Submit)
 
-Replace `{{GH}}` with your actual handle, `{{YTID}}` with the YouTube video ID, `{{DEMO}}` with the deployed web URL:
+Replace `{{YTID}}` with the YouTube video ID and `{{DEMO}}` with the deployed web URL:
 
 ```bash
 # 1) Public repo
-curl -sI https://github.com/{{GH}}/chw-companion | head -1                                # 200
+curl -sI https://github.com/A-SHOJAEI/chw-companion | head -1                              # 200
 
 # 2) APK download (handles GitHub LFS redirects with -L)
-curl -sIL https://github.com/{{GH}}/chw-companion/releases/download/v0.1.0/chw-companion-v0.1.0.apk | tail -1   # 200
+curl -sIL https://github.com/A-SHOJAEI/chw-companion/releases/download/v0.1.0/chw-companion-v0.1.0.apk | tail -1   # 200
 
-# 3) Web demo
-curl -sIL {{DEMO}} | tail -1                                                              # 200
+# 3) Web demo (replace {{DEMO}} with your deployed URL)
+curl -sIL {{DEMO}} | tail -1                                                               # 200
 
-# 4) YouTube public
-curl -sIL https://www.youtube.com/watch?v={{YTID}} | tail -1                              # 200
+# 4) YouTube public (replace {{YTID}} with your video id)
+curl -sIL https://www.youtube.com/watch?v={{YTID}} | tail -1                               # 200
 
 # 5) Writeup word count
 wc -w docs/writeup.md                                                                     # ≤ 1500
@@ -64,7 +64,7 @@ All six should hit; if any fails do not click Submit.
 6. [ ] **Cover image:** upload `docs/visual/cover-1280x720.png`
 7. [ ] **Gallery images:** upload `docs/visual/architecture-1920x1080.png` plus one UI screenshot
 8. [ ] **Video URL:** YouTube link (Public)
-9. [ ] **Code repo URL:** `https://github.com/<your-handle>/chw-companion`
+9. [ ] **Code repo URL:** `https://github.com/A-SHOJAEI/chw-companion`
 10. [ ] **Live demo URL** OR **attached APK file** as Files
 11. [ ] **Track:** select **Main Track**
 12. [ ] Confirm identity-verification status shows green

@@ -90,7 +90,7 @@ gh release create $TAG \
 
 Verify the APK is downloadable in incognito:
 ```
-curl -sI https://github.com/<you>/chw-companion/releases/download/v0.1.0/chw-companion-v0.1.0.apk | head -3
+curl -sI https://github.com/A-SHOJAEI/chw-companion/releases/download/v0.1.0/chw-companion-v0.1.0.apk | head -3
 ```
 
 Should return `302` (redirect to LFS / S3) then `200`.
@@ -144,10 +144,10 @@ bash scripts/preflight.sh    # TODO write this; for now run by hand
 Or by hand:
 ```
 # Repo public
-curl -sI https://github.com/<you>/chw-companion | head -1
+curl -sI https://github.com/A-SHOJAEI/chw-companion | head -1
 
 # APK downloadable
-curl -sI https://github.com/<you>/chw-companion/releases/download/v0.1.0/chw-companion-v0.1.0.apk | head -3
+curl -sI https://github.com/A-SHOJAEI/chw-companion/releases/download/v0.1.0/chw-companion-v0.1.0.apk | head -3
 
 # Web demo
 curl -sI https://chwcompanion.pages.dev | head -1
