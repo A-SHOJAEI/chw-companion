@@ -24,8 +24,14 @@
 ## SHA-256
 
 ```
-TODO: replace with output of `sha256sum chw-companion-v0.1.0.apk`
+456d7d29d32cdc295e8a01181d990a30a10ffbebbdbf1c1170a957907868a166  chw-companion-v0.1.0.apk
 ```
+
+> If you build the same commit (`master` HEAD as of v0.1.0) yourself, the hash should match. Verify with `shasum -a 256 chw-companion-v0.1.0.apk`.
+
+## Build flavor
+
+This v0.1.0 is built with `assembleDebug -PreactNativeArchitectures=arm64-v8a` and signed with the Android debug keystore. Judges sideloading the APK should expect the standard "install from unknown sources" prompt; the package is `org.chwcompanion.app` and targets Android 12+. A production-signed release will follow once the upload keystore is generated per [`docs/release.md`](release.md).
 
 ## Known limitations
 

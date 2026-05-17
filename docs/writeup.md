@@ -58,9 +58,10 @@ We are not Nigerian midwives. Every clinical threshold in the system prompt is c
 ## How to run
 
 ```bash
-git clone https://github.com/<you>/chw-companion
+git clone https://github.com/{{GH}}/chw-companion
 cd chw-companion && npm install && npx expo prebuild --platform android
-npx expo run:android   # Android 12+ device with ≥ 8 GB RAM
+npx expo run:android        # Android 12+ device with ≥ 8 GB RAM
+# or for judges: scripts/sideload-weights.sh after a debug APK install
 ```
 
 The first launch downloads weights from Hugging Face (`Cactus-Compute/gemma-4-E4B-it`, int4, ~6 GB compressed) and caches them on device. Subsequent launches are local. For judges with a connected Android phone but no patience for the download, [`scripts/sideload-weights.sh`](../scripts/sideload-weights.sh) does the whole thing via `adb push` in ~5 minutes.
@@ -69,17 +70,19 @@ The browser fallback at `chwcompanion.pages.dev` requires no install — open it
 
 ## Links
 
-- Code: <https://github.com/chwcompanion/chw-companion> (Apache 2.0)
-- Video: <https://youtube.com/watch?v=TBD>
-- Live demo: <https://chwcompanion.pages.dev>
-- APK: <https://github.com/chwcompanion/chw-companion/releases>
-- Model: <https://huggingface.co/google/gemma-4-E4B-it>
-- WHO MCPC source: <https://www.who.int/publications/i/item/9789241565493>
+- **Code:** <https://github.com/{{GH}}/chw-companion> (Apache 2.0)
+- **Video:** <https://youtube.com/watch?v={{YTID}}>
+- **Live demo:** <https://chwcompanion.pages.dev>
+- **APK:** <https://github.com/{{GH}}/chw-companion/releases/tag/v0.1.0>
+- **Model:** <https://huggingface.co/google/gemma-4-E4B-it>
+- **WHO MCPC source:** <https://www.who.int/publications/i/item/9789241565493>
 
 ## Acknowledgements
 
-Google DeepMind for Gemma 4. Henry Ndubuaku and the Cactus Compute team for `cactus-react-native`. Marc Rousavy for `react-native-nitro-modules`. The WHO Department of Maternal, Newborn, Child and Adolescent Health, whose MCPC manual is the clinical authority every protocol_id in this app points at. Every open-source library pinned in `package.json`.
+Google DeepMind for Gemma 4. Henry Ndubuaku and the Cactus Compute team for `cactus-react-native`. Marc Rousavy for `react-native-nitro-modules`. The WHO Department of Maternal, Newborn, Child and Adolescent Health, whose MCPC manual is the clinical authority every `protocol_id` in this app points at. Every open-source library pinned in `package.json`.
 
 ---
+
+*Submitted to the Main Track. The project also qualifies for the Cactus Special Technology prize via its use of `cactus-react-native` to run Gemma 4 fully on-device.*
 
 *This project is built with Gemma 4 and complies with the Gemma Terms of Use and Prohibited Use Policy at <https://ai.google.dev/gemma/terms>.*

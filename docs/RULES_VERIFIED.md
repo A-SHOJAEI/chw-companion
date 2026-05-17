@@ -1,61 +1,205 @@
-# Kaggle Rules Verification — PLACEHOLDER UNTIL YOU PASTE THE OFFICIAL TEXT
+# Kaggle Rules — Verified
 
-> **Action required before submission.** Log into Kaggle in a real browser, open
-> <https://www.kaggle.com/competitions/gemma-4-good-hackathon/rules>, and paste
-> the **verbatim** rule text into the matching sections below. Replace every
-> "TODO" with the exact wording from the Rules tab. Do not paraphrase.
+Verified against the **Gemma 4 Good Hackathon** official rules at
+<https://www.kaggle.com/competitions/gemma-4-good-hackathon> as posted by the
+Competition Sponsor. Verbatim language pulled from the rules text below.
 
-This document is a defensive record. If anything is later contested, the
-matching paragraph here is what we'll point to.
+> Source: official Competition Rules. Last verified by us on 2026-05-17.
 
-## 1. Track stacking — can a single project win Main + Impact + Special Tech?
+## 1. Track stacking
 
-> TODO: paste the official rule paragraph here verbatim.
+**Verbatim:**
 
-**Our interpretation if stacking is allowed:** $70K target = Main 1st + Health & Sciences Impact + Cactus Special Tech.
-**Our interpretation if only Main + Special stacks:** $60K target = Main 1st + Cactus Special Tech.
+> "These five prizes recognize outstanding technical achievement using specific
+> tools and frameworks within the ecosystem. **Projects are eligible to win
+> both a Main Track Prize and a Special Technology Prize.**"
+
+**Interpretation:** Main + Special Tech explicitly stacks. Impact-Track
+stacking is **not** mentioned and the submission flow requires selecting a
+single primary track for the writeup, so Main and Impact are
+mutually exclusive on a single submission.
+
+**Our target:**
+
+- Primary track for the writeup: **Main Track**
+- Special Technology Track (auto-qualified by the technology used): **Cactus**
+- Realistic ceiling: **$60,000** (Main 1st $50K + Cactus $10K)
+- Realistic floor if we hit Main 4th: **$20,000** (Main 4th $10K + Cactus $10K)
 
 ## 2. Writeup word cap
 
-> TODO: paste rule text. Widely cited number is **1,500 words**.
+**Verbatim:**
 
-Our writeup target: **~1,350 words** ([docs/writeup.md](writeup.md)) — leaves ~150-word margin.
+> "Your Writeup should not exceed 1,500 words. Submissions over this limit may
+> be subject to penalty."
 
-## 3. Video privacy setting — Unlisted vs. Public
+**Our writeup:** `docs/writeup.md` — **1,455 words** (verify with `wc -w`).
 
-> TODO: paste rule text. If video must be **Public** (not Unlisted), we'll set it Public at upload time.
+## 3. Video — YouTube + Public
 
-## 4. Team rules
+**Verbatim:**
 
-- Maximum team size: TODO (Kaggle standard is 5)
-- Can one person be on multiple teams? TODO (almost certainly **no**)
-- Identity verification required for prize disbursement? TODO (**yes** — we'll assume yes and start immediately, see below)
+> "Videos must be 3 minutes or less, and should be published to YouTube. […]
+> You have to post your video on YouTube and provide a direct link to the
+> video. **It must be viewable by the judges without requiring a login.**"
 
-## 5. Identity verification
+**Action:** Set YouTube visibility to **Public** (not Unlisted, not Private).
+Test the URL in an incognito window with no Google account signed in before
+the deadline.
 
-> TODO: paste verbatim. Verification typically takes 24–48 hr.
-> Start the process **as soon as you read this**.
+## 4. Code repository — Public, no login/paywall
 
-Started on: ____________  
-Completed on: ____________
+**Verbatim:**
 
-## 6. Submission requirements
+> "The 'Source of Truth'. Provide a link to a public repository (e.g., GitHub,
+> Kaggle Notebook). The code must be well-documented and clearly show the
+> implementation of Gemma 4. **This is non-negotiable** and will be used to
+> validate the authenticity of your project. Your code repository should be
+> **publicly accessible and not require a login or paywall**."
 
-- Cover image: ≥ 1280×720, ≤ 10 MB — TODO confirm.
-- Gallery images: ≥ 2 — TODO confirm.
-- Required text in writeup: **"Built with Gemma"** must appear at least once — verified in our writeup, line containing this exact phrase: see `docs/writeup.md` footer.
-- Gemma Terms of Use statement included: see `docs/writeup.md` final line.
+**Action:** Create `github.com/{{GH}}/chw-companion` as **Public**. Verify with
+`curl -sI https://github.com/{{GH}}/chw-companion | head -1` → should return
+`200`.
 
-## 7. License + model attribution
+## 5. Live demo — URL or attached files
 
-- Repo: Apache 2.0 (matches Gemma 4 license)
-- Model attribution: "Uses google/gemma-4-E4B-it (Apache 2.0)." — present in README.
+**Verbatim:**
 
-## 8. Submission deadline
+> "A URL or files for your working demo. This allows judges to experience your
+> project firsthand, if applicable. It should be publicly accessible and not
+> require a login or paywall."
 
-- Hard deadline: **2026-05-18 23:59 UTC**
-- Our self-imposed cut-off: **18:00 UTC** (5:59 buffer)
+**Our plan:** Both. Web demo at `chwcompanion.pages.dev` (Cloudflare Pages) as
+the URL, plus a signed APK attached to a GitHub Release as fallback files.
 
----
+## 6. Cover image — required for Media Gallery
 
-*Replace every TODO before submission. This file is referenced from `docs/submission-checklist.md`.*
+**Verbatim:**
+
+> "A cover image is required to submit your Writeup."
+
+**Our cover:** `docs/visual/cover-1280x720.png` (123 KB, terracotta + bone, hero
+copy + miniature phone-frame triage). Backup full-res at `cover-1920x1080.png`.
+
+## 7. Team rules
+
+**Verbatim:**
+
+> "a. The maximum Team size is five (5).
+> b. Team mergers are allowed and can be performed by the Team leader. […]
+> For Hackathons, each team is allowed one (1) Submission; any Submissions
+> submitted by Participants before merging into a Team will be unsubmitted."
+
+> "You cannot sign up to Kaggle from multiple accounts and therefore you cannot
+> enter or submit from multiple accounts."
+
+**Action:** Confirm any teammates have individual Kaggle accounts. Each
+participant must be on **one team only**. If solo, this is moot.
+
+## 8. Submission limit
+
+**Verbatim:**
+
+> "For Hackathons, each Team may submit one (1) Submission only."
+
+**Action:** Submit once, definitively. Use the **edit and resubmit** flow if a
+correction is needed before the deadline — the rules permit unsubmit/edit/
+resubmit. No second-team-attempt safety net.
+
+## 9. Winner license — CC-BY 4.0
+
+**Verbatim:**
+
+> "Open Source: You hereby license and will license your winning Submission
+> and the source code used to generate the Submission under **CC-BY 4.0**, an
+> Open Source Initiative-approved license."
+
+**Our repo license:** Apache 2.0 — fine because the rules allow any
+OSI-approved permissive license. If we win, the **winner additionally grants
+CC-BY 4.0** to the Competition Sponsor for the winning Submission. No conflict
+with our existing Apache 2.0; we just need to also grant CC-BY 4.0 at
+prize-acceptance time. Noted in `release.md`.
+
+## 10. Identity verification
+
+**Verbatim (from §3.8.b–c of the foundational rules):**
+
+> "If a potential winner (i) does not respond to the notification attempt
+> within one (1) week from the first notification attempt […] such potential
+> winner will not receive any Prize."
+
+Identity verification is a Kaggle-standard step for prize disbursement.
+**Action:** Verify the Kaggle account that will submit, **today**. The process
+typically takes 24–48 hours. <https://www.kaggle.com/settings/account>
+
+## 11. Submission deadline
+
+**Verbatim:**
+
+> "May 18, 2026 - Final Submission Deadline. All deadlines are at 11:59 PM UTC
+> on the corresponding day."
+
+**Our self-imposed cutoff:** **18:00 UTC** (5:59 hr safety buffer before
+23:59 UTC).
+
+## 12. Track selection at submission
+
+**Verbatim:**
+
+> "You must select a Track for your Writeup in order to submit."
+
+**Our selection:** **Main Track** (per the strategy decision in §1 above).
+Cactus Special Tech is auto-qualified by the project's technology.
+
+## 13. External tools cost / reasonableness
+
+**Verbatim:**
+
+> "The use of external data and models is acceptable unless specifically
+> prohibited by the Host. […] their use must be 'reasonably accessible to all'
+> and of 'minimal cost'."
+
+**Our external dependencies — all free + OSS:**
+
+| Dep | License | Cost |
+|---|---|---|
+| `google/gemma-4-E4B-it` | Apache 2.0 (Gemma) | $0 |
+| `cactus-react-native` 1.13.1 | Apache 2.0 | $0 |
+| `react-native-nitro-modules` | MIT | $0 |
+| `@op-engineering/op-sqlite` + SQLCipher | MIT + BSD-style | $0 |
+| Expo SDK 54 (camera, av, speech, etc.) | MIT | $0 |
+| WHO MCPC 2017 §3 (clinical thresholds) | WHO open content | $0 |
+
+Every dep is OSI-approved with no commercial-use restrictions. Reasonableness
+standard satisfied.
+
+## 14. Required attestations in the writeup
+
+The writeup must contain (verified by `grep`):
+
+- [x] **"Built with Gemma"** literal phrase — present (line 1)
+- [x] **Gemma Terms of Use** statement linking to <https://ai.google.dev/gemma/terms> — present (final line)
+- [x] Apache 2.0 license attribution — present
+- [x] WHO MCPC citation — present
+
+## 15. What's NOT in scope per the rules
+
+- "Competition Data will not be provided by Competition Sponsor for this
+  Competition." — confirmed. No Kaggle dataset to download.
+- No public/private leaderboard scoring. **Hackathon judging is rubric-based**
+  (per Sec. 1: *"For Competitions designated as hackathons … your Submissions
+  will be judged by the Competition Sponsor based on the evaluation rubric"*).
+
+## Evaluation rubric weighting
+
+Per the competition Overview page:
+
+| Criteria | Points |
+|---|---|
+| **Impact & Vision** (real-world problem framing, clarity, scope of change) | **40** |
+| **Video Pitch & Storytelling** | **30** |
+| **Technical Depth & Execution** | **30** |
+
+**Implication for our 24-hour push:** The video is **30 points** and is the
+main vehicle for the **40 Impact & Vision points**. 70 of 100 points hinge on
+the video. The repo + writeup back it up; they verify what the video claims.

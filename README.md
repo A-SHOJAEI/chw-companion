@@ -4,7 +4,7 @@
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE) [![Built with Gemma](https://img.shields.io/badge/Built%20with-Gemma%204-c9532a.svg)](https://ai.google.dev/gemma)
 
-**Try it now** → [chwcompanion.pages.dev](https://chwcompanion.pages.dev) (Chrome 113+)  ·  **Download APK** → [github.com/chwcompanion/chw-companion/releases](https://github.com/chwcompanion/chw-companion/releases)
+**Try it now** → [chwcompanion.pages.dev](https://chwcompanion.pages.dev) (Chrome 113+)  ·  **Download APK** → [github.com/{{GH}}/chw-companion/releases](https://github.com/{{GH}}/chw-companion/releases)
 
 A community health worker records a 60-second voice note in Hausa, captures three photos (face, ankle, urinalysis dipstick), and `google/gemma-4-E4B-it` emits a structured triage decision in a single forward pass — `record_vitals`, `flag_danger_sign`, `recommend_action`, `schedule_followup` — entirely on-device. No signal. No cloud account. No patient data leaving the phone.
 
@@ -61,7 +61,7 @@ Chrome 113+ for WebGPU; older browsers fall back to canned-replay JSON identical
 ### Android, on your machine
 
 ```bash
-git clone https://github.com/chwcompanion/chw-companion
+git clone https://github.com/{{GH}}/chw-companion
 cd chw-companion
 npm install
 npx expo prebuild --platform android
@@ -97,6 +97,8 @@ CHW Companion is **decision support, not a medical diagnosis.** Field deployment
 ## License
 
 Apache License 2.0 — see [LICENSE](LICENSE).
+
+> If this project wins a prize in the Gemma 4 Good Hackathon, the winning Submission is additionally licensed to Google LLC under **CC-BY 4.0** per the competition rules (§2.5.a). This is a winner's-grant and does not affect the Apache 2.0 license of the repository.
 
 ## Deep dives
 
