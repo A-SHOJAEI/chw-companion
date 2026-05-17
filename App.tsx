@@ -8,6 +8,7 @@ import { HomeScreen } from './src/screens/HomeScreen';
 import { VisitScreen } from './src/screens/VisitScreen';
 import { ResultScreen } from './src/screens/ResultScreen';
 import { HistoryScreen } from './src/screens/HistoryScreen';
+import { t } from './src/lib/i18n';
 import { colors, spacing, typography } from './src/theme';
 
 type Route =
@@ -56,34 +57,38 @@ function reducer(state: AppState, action: Action): AppState {
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [loadingMessage, setLoadingMessage] = useState('Starting…');
+  const [loadingTitle, setLoadingTitle] = useState(t('boot.openingDb'));
+  const [loadingHint, setLoadingHint] = useState('');
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
-        setLoadingMessage('Opening encrypted database…');
+        setLoadingTitle(t('boot.openingDb'));
+        setLoadingHint('');
         await initDb();
         if (cancelled) return;
         dispatch({ type: 'DB_READY' });
 
-        setLoadingMessage('Loading Gemma 4 weights…');
+        setLoadingTitle(t('boot.loadingModel'));
         // Model identification:
-        //  - If MODEL_LOCAL_PATH env or sideloaded path is detected, prefer it.
-        //  - Otherwise fall back to registry slug; cactus-react-native will
-        //    download from HuggingFace on first launch.
-        // For the hackathon emulator demo, sideload to the path below before
-        // launch:
-        //   adb push <unzipped weights dir> /data/data/org.chwcompanion.app/files/cactus/gemma-4-e4b-it
+        //  - Prefer a sideloaded absolute path on the device (set by the
+        //    `scripts/sideload-weights.sh` runbook for demos / judges).
+        //  - Otherwise fall back to the registry slug; the engine pulls the
+        //    weights from Hugging Face on first launch.
         const sideloadPath = '/data/data/org.chwcompanion.app/files/cactus/gemma-4-e4b-it';
         await Gemma4Engine.init({
           localModelPath: sideloadPath,
           registrySlug: 'gemma-4-e4b-it',
           quantization: 'int4',
           onDownloadProgress: (p) => {
-            if (!cancelled) {
-              dispatch({ type: 'MODEL_PROGRESS', fraction: p });
-              setLoadingMessage(`Downloading weights · ${Math.round(p * 100)}%`);
+            if (cancelled) return;
+            dispatch({ type: 'MODEL_PROGRESS', fraction: p });
+            // Only show the download UI if the path actually downloads — the
+            // sideload-first branch resolves p=1.0 immediately.
+            if (p < 1) {
+              setLoadingTitle(`${t('boot.downloadingWeights')} · ${Math.round(p * 100)}%`);
+              setLoadingHint(t('boot.firstLaunchHint'));
             }
           },
         });
@@ -107,15 +112,19 @@ export default function App() {
   }, []);
 
   const screen = renderRoute(state, dispatch);
+  const showOverlay = !state.dbReady || (!state.modelReady && state.route.name === 'home');
 
   return (
     <SafeAreaProvider>
       <StatusBar barStyle="dark-content" backgroundColor={colors.bone} />
       <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
-        {!state.dbReady || (!state.modelReady && state.route.name === 'home') ? (
+        {showOverlay ? (
           <View style={styles.loadingOverlay}>
-            <ActivityIndicator size="large" color={colors.terracotta} />
-            <Text style={styles.loadingText}>{loadingMessage}</Text>
+            <Text style={styles.loadingBrand}>{t('app.name')}</Text>
+            <Text style={styles.loadingTag}>{t('app.tagline')}</Text>
+            <ActivityIndicator size="large" color={colors.terracotta} style={styles.loadingSpinner} />
+            <Text style={styles.loadingTitle}>{loadingTitle}</Text>
+            {loadingHint ? <Text style={styles.loadingHint}>{loadingHint}</Text> : null}
             {state.modelError ? (
               <Text style={styles.errorText}>{state.modelError}</Text>
             ) : null}
@@ -182,9 +191,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 10,
-    paddingHorizontal: spacing.lg,
-    gap: spacing.lg,
+    paddingHorizontal: spacing.xl,
   },
-  loadingText: { ...typography.bodyLg, color: colors.deepIndigo, textAlign: 'center' },
-  errorText: { ...typography.body, color: colors.clinicRed, textAlign: 'center' },
+  loadingBrand: { ...typography.display, color: colors.terracotta, marginBottom: spacing.xs },
+  loadingTag: { ...typography.body, color: colors.slate, marginBottom: spacing.xxl, fontStyle: 'italic' },
+  loadingSpinner: { marginBottom: spacing.lg },
+  loadingTitle: { ...typography.bodyLg, color: colors.deepIndigo, textAlign: 'center' },
+  loadingHint: { ...typography.caption, color: colors.slate, textAlign: 'center', marginTop: spacing.sm },
+  errorText: { ...typography.body, color: colors.clinicRed, textAlign: 'center', marginTop: spacing.lg },
 });

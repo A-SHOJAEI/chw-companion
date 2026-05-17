@@ -41,7 +41,11 @@ export function HistoryScreen({ onBack, onOpenVisit }: Props) {
         <Text style={styles.heading}>{t('history.title')}</Text>
       </Pressable>
       {rows.length === 0 ? (
-        <Text style={styles.empty}>{t('history.empty')}</Text>
+        <View style={styles.emptyWrap}>
+          <Text style={styles.emptyIcon}>·</Text>
+          <Text style={styles.emptyTitle}>{t('history.empty')}</Text>
+          <Text style={styles.emptyHint}>{t('history.emptyHint')}</Text>
+        </View>
       ) : (
         <FlatList
           data={rows}
@@ -51,15 +55,16 @@ export function HistoryScreen({ onBack, onOpenVisit }: Props) {
               onPress={() => onOpenVisit?.(item.id)}
               style={({ pressed }) => [styles.row, pressed && { opacity: 0.85 }]}
               accessibilityRole="button"
-              accessibilityLabel={`Visit for ${item.patient_name}, severity ${item.severity ?? 'clear'}, ${new Date(item.created_at).toLocaleDateString()}`}
+              accessibilityLabel={`Visit for ${formatPatient(item.patient_name)}, severity ${item.severity ?? 'clear'}, ${new Date(item.created_at).toLocaleDateString()}`}
               accessibilityHint="Opens the full record for this visit."
             >
               <View style={[styles.severityBar, severityBg(item.severity)]} />
               <View style={styles.rowBody}>
-                <Text style={styles.patient}>{item.patient_name}</Text>
+                <Text style={styles.patient}>{formatPatient(item.patient_name)}</Text>
                 <Text style={styles.meta}>
-                  {new Date(item.created_at).toLocaleDateString()} ·{' '}
-                  {item.bp_sys && item.bp_dia ? `${item.bp_sys}/${item.bp_dia}` : '—'} ·{' '}
+                  {new Date(item.created_at).toLocaleDateString()}
+                  {item.bp_sys && item.bp_dia ? ` · BP ${item.bp_sys}/${item.bp_dia}` : ''}
+                  {' · '}
                   {item.synced_at ? t('history.synced') : t('history.syncPending')}
                 </Text>
                 {item.recommended_action ? (
@@ -74,9 +79,14 @@ export function HistoryScreen({ onBack, onOpenVisit }: Props) {
         />
       )}
       <View style={{ height: spacing.lg }} />
-      <BigButton title="←" variant="secondary" onPress={onBack} />
+      <BigButton title="←" variant="secondary" onPress={onBack} accessibilityLabel="Back to home" />
     </View>
   );
+}
+
+function formatPatient(name: string): string {
+  if (!name || name === 'Pending') return t('result.unknownPatient');
+  return name;
 }
 
 function severityBg(sev: VisitRow['severity']): { backgroundColor: string } {
@@ -87,7 +97,10 @@ function severityBg(sev: VisitRow['severity']): { backgroundColor: string } {
 const styles = StyleSheet.create({
   wrap: { flex: 1, padding: spacing.lg, paddingTop: spacing.xxxl, backgroundColor: colors.bone },
   heading: { ...typography.display, color: colors.deepIndigo, marginBottom: spacing.lg },
-  empty: { ...typography.body, color: colors.slate, textAlign: 'center', marginTop: spacing.xxl },
+  emptyWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: spacing.xs },
+  emptyIcon: { fontSize: 56, color: colors.divider, marginBottom: spacing.md },
+  emptyTitle: { ...typography.heading, color: colors.deepIndigo },
+  emptyHint: { ...typography.body, color: colors.slate, textAlign: 'center', maxWidth: 280 },
   row: {
     flexDirection: 'row',
     backgroundColor: colors.card,
@@ -98,6 +111,6 @@ const styles = StyleSheet.create({
   severityBar: { width: 8 },
   rowBody: { flex: 1, padding: spacing.md },
   patient: { ...typography.heading, fontSize: 18, color: colors.deepIndigo },
-  meta: { ...typography.caption, color: colors.slate },
+  meta: { ...typography.caption, color: colors.slate, marginTop: 2 },
   action: { ...typography.body, color: colors.deepIndigo, marginTop: spacing.xs },
 });

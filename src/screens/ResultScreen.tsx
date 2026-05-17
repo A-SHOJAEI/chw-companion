@@ -64,19 +64,23 @@ export function ResultScreen({ visitId, wallMs, onDone }: Props) {
     if (!r.ok) setPrintError(r.error ?? 'Could not generate form');
   };
 
+  const wallSec = wallMs > 0 ? (wallMs / 1000).toFixed(1) : null;
+
   return (
     <View style={styles.wrap}>
       <StatusBanner severity={severity} caption={caption} />
       <ScrollView contentContainerStyle={styles.scroll}>
         <TriageCard visit={visit} dangerSigns={signs} />
 
-        <View style={styles.metaRow}>
-          <Text style={styles.meta}>Inference {(wallMs / 1000).toFixed(1)}s</Text>
-          {visit.recommended_timeframe_hours != null && visit.recommended_facility ? (
-            <Text style={styles.meta}>
-              → {visit.recommended_facility} · {visit.recommended_timeframe_hours}h
+        <View style={styles.metaCard}>
+          <View style={styles.metaRow}>
+            <View style={styles.deviceDot} />
+            <Text style={styles.metaPrimary}>
+              On-device inference{wallSec ? ` · ${wallSec}s` : ''}
             </Text>
-          ) : null}
+          </View>
+          <Text style={styles.metaSecondary}>{t('footer.who')}</Text>
+          <Text style={styles.metaSecondary}>{t('footer.decisionSupport')}</Text>
         </View>
 
         {printError ? <Text style={styles.printError}>{printError}</Text> : null}
@@ -109,8 +113,16 @@ const styles = StyleSheet.create({
   wrap: { flex: 1, backgroundColor: colors.bone },
   loadingWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.bone },
   scroll: { padding: spacing.lg, gap: spacing.md, paddingBottom: spacing.xxxl },
-  metaRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  meta: { ...typography.caption, color: colors.slate },
+  metaCard: {
+    backgroundColor: colors.card,
+    borderRadius: 12,
+    padding: spacing.md,
+    gap: 4,
+  },
+  metaRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+  deviceDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.okraGreen },
+  metaPrimary: { ...typography.caption, color: colors.deepIndigo, fontWeight: '500' },
+  metaSecondary: { ...typography.caption, color: colors.slate, fontSize: 12 },
   actions: { gap: spacing.md, marginTop: spacing.lg },
   printError: { ...typography.caption, color: colors.clinicRed, marginTop: spacing.xs },
 });

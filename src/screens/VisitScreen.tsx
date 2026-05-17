@@ -19,19 +19,17 @@ interface Props {
 export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props) {
   const [state, dispatch] = useVisitMachine();
   const [busy, setBusy] = useState(false);
-  const [statusLine, setStatusLine] = useState<string>(t('status.idle'));
+  const [statusLine, setStatusLine] = useState<string>('');
 
-  // Pre-load sample data into the state machine when "Try sample visit" is used.
+  // Pre-load sample data into the state machine when "Sample visit" is used.
   useEffect(() => {
     if (!useSampleData) return;
     void prepareSample();
     async function prepareSample(): Promise<void> {
       try {
-        // Use materializeWav for the audio path so the helper copies the
-        // bundled asset into cacheDirectory before we read it.
         const audioUri = await materializeWav(require('../assets/sample-data/sample_audio.wav'));
         const sampleImage = await materializeImage(require('../assets/sample-data/sample_ankle.jpg'));
-        dispatch({ type: 'AUDIO_CAPTURED', uri: audioUri, seconds: 5 });
+        dispatch({ type: 'AUDIO_CAPTURED', uri: audioUri, seconds: 12 });
         dispatch({ type: 'PHOTO_CAPTURED', slot: 'face', uri: sampleImage });
         dispatch({ type: 'PHOTO_CAPTURED', slot: 'ankle', uri: sampleImage });
         dispatch({ type: 'PHOTO_CAPTURED', slot: 'dipstick', uri: sampleImage });
@@ -55,7 +53,7 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
   const runInference = useCallback(async () => {
     if (busy) return;
     setBusy(true);
-    setStatusLine(t('status.thinking'));
+    setStatusLine(t('visit.readingNotes'));
     const t0 = Date.now();
     try {
       // Sample-visit mode uses the slim system prompt to stay within emulator
@@ -71,6 +69,7 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
       const imagePaths = [state.photos.face, state.photos.ankle, state.photos.dipstick].filter(
         (p): p is string => !!p
       );
+      setStatusLine(t('visit.reasoning'));
 
       const { tools, minimal } = pickToolSet();
       const result = await Gemma4Engine.infer({
@@ -111,13 +110,18 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
       });
     } finally {
       setBusy(false);
-      setStatusLine(t('status.idle'));
+      setStatusLine('');
     }
   }, [busy, useSampleData, state, dispatch, onResult]);
 
   return (
     <ScrollView contentContainerStyle={styles.wrap}>
-      <Text style={styles.heading}>Ziyara</Text>
+      <Text style={styles.heading}>{t('visit.heading')}</Text>
+      {useSampleData ? (
+        <Text style={styles.demoNote}>
+          Demo · Fatima Bello, 32 weeks · WHO MCPC §3-aligned triage
+        </Text>
+      ) : null}
 
       <Step
         index={1}
@@ -177,11 +181,16 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
         {busy ? (
           <View style={styles.thinkingRow}>
             <ActivityIndicator color={colors.terracotta} />
-            <Text style={styles.thinkingText}>{statusLine}</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.thinkingText}>{statusLine}</Text>
+              <Text style={styles.thinkingHint}>
+                On-device · runs offline · usually 30–60 s
+              </Text>
+            </View>
           </View>
         ) : (
           <BigButton
-            title={t('visit.thinking')}
+            title={t('visit.reasonButton')}
             onPress={() => void runInference()}
             disabled={!canProceedToReason(state)}
             variant="primary"
@@ -196,7 +205,7 @@ export function VisitScreen({ onResult, onCancel, useSampleData = false }: Props
         </View>
       ) : null}
 
-      <BigButton title={t('error.tryAgain')} variant="secondary" onPress={onCancel} />
+      <BigButton title={t('visit.cancel')} variant="secondary" onPress={onCancel} />
     </ScrollView>
   );
 }
@@ -256,11 +265,19 @@ const stepStyles = StyleSheet.create({
 
 const styles = StyleSheet.create({
   wrap: { padding: spacing.lg, paddingTop: spacing.xxxl, backgroundColor: colors.bone, flexGrow: 1 },
-  heading: { ...typography.display, color: colors.deepIndigo, marginBottom: spacing.lg },
+  heading: { ...typography.display, color: colors.deepIndigo, marginBottom: spacing.sm },
+  demoNote: {
+    ...typography.caption,
+    color: colors.terracotta,
+    marginBottom: spacing.lg,
+    letterSpacing: 0.4,
+    textTransform: 'uppercase',
+  },
   photoRow: { flexDirection: 'row', gap: spacing.sm },
   recap: { ...typography.body, color: colors.okraGreen },
   thinkingRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, padding: spacing.lg },
   thinkingText: { ...typography.bodyLg, color: colors.deepIndigo },
+  thinkingHint: { ...typography.caption, color: colors.slate, marginTop: 2 },
   errorBox: {
     backgroundColor: '#FAE0E0',
     borderRadius: radii.md,

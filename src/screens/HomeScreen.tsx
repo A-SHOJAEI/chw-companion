@@ -77,6 +77,11 @@ export function HomeScreen({ onStartVisit, onStartSampleVisit, onOpenHistory, mo
         ) : null}
       </View>
 
+      <View style={styles.offlineBadge}>
+        <View style={styles.offlineDot} />
+        <Text style={styles.offlineText}>{t('home.offlineBadge')}</Text>
+      </View>
+
       <View style={{ flex: 1 }} />
 
       <View style={styles.buttonStack}>
@@ -86,13 +91,15 @@ export function HomeScreen({ onStartVisit, onStartSampleVisit, onOpenHistory, mo
           onPress={onStartVisit}
           disabled={!modelReady}
         />
-        <View style={{ height: spacing.md }} />
-        <BigButton
-          title="Try sample visit"
-          variant="secondary"
-          onPress={onStartSampleVisit}
-          disabled={!modelReady}
-        />
+        <View style={styles.demoCard}>
+          <BigButton
+            title={t('home.tryDemo')}
+            variant="secondary"
+            onPress={onStartSampleVisit}
+            disabled={!modelReady}
+          />
+          <Text style={styles.demoCaption}>{t('home.tryDemoSub')}</Text>
+        </View>
         <Pressable
           onPress={onOpenHistory}
           hitSlop={12}
@@ -134,7 +141,17 @@ const styles = StyleSheet.create({
   statNumber: { ...typography.display, fontSize: 64, lineHeight: 70, color: colors.terracotta },
   statCaption: { ...typography.bodyLg, color: colors.deepIndigo },
   unsynced: { ...typography.caption, color: colors.slate, marginTop: spacing.xs },
+  offlineBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginTop: spacing.lg,
+  },
+  offlineDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.okraGreen },
+  offlineText: { ...typography.caption, color: colors.slate, letterSpacing: 0.4 },
   buttonStack: { gap: spacing.md, alignItems: 'stretch' },
+  demoCard: { gap: spacing.xs, alignItems: 'stretch' },
+  demoCaption: { ...typography.caption, color: colors.slate, textAlign: 'center', marginTop: 2 },
   historyLink: { ...typography.label, color: colors.deepIndigo, marginTop: spacing.lg, textAlign: 'center' },
   loadingHint: { ...typography.caption, color: colors.slate, textAlign: 'center', marginTop: spacing.sm },
 });
