@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"
+     font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#FBF6E8"/>
+      <stop offset="100%" stop-color="#F4ECD8"/>
+    </radialGradient>
+    <linearGradient id="ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C9532A"/>
+      <stop offset="100%" stop-color="#E8A33D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect x="0" y="0" width="260" height="14" fill="url(#ribbon)"/>
+  <rect x="0" y="0" width="14" height="260" fill="url(#ribbon)"/>
+
+  <!-- Brand mark -->
+  <g transform="translate(96 96)">
+    <rect x="0" y="0" width="56" height="56" rx="12" fill="#C9532A"/>
+    <text x="28" y="40" text-anchor="middle" font-family="Fraunces, serif"
+          font-weight="700" font-size="28" fill="#F4ECD8">C</text>
+  </g>
+  <text x="172" y="135" font-family="Inter, sans-serif" font-weight="500"
+        font-size="16" fill="#6B6F76" letter-spacing="3">CHW COMPANION</text>
+
+  <!-- Beat chip -->
+  <g transform="translate(96 968)">
+    <circle cx="8" cy="8" r="8" fill="#B11226"/>
+    <text x="28" y="14" font-family="Inter, sans-serif" font-weight="600"
+          font-size="14" fill="#6B6F76" letter-spacing="2">08 — THE MOAT</text>
+  </g>
+
+  <text x="96" y="260" font-family="Fraunces, serif" font-weight="700"
+        font-size="72" fill="#1B2A4E">Why on-device is not optional.</text>
+
+  <g font-family="Inter, sans-serif" font-size="38" fill="#1B2A4E">
+    <g transform="translate(96 360)">
+      <rect x="0" y="0" width="60" height="60" rx="30" fill="#B11226"/>
+      <text x="30" y="44" text-anchor="middle" font-weight="700"
+            font-size="40" fill="#F4ECD8">1</text>
+      <text x="96" y="44" font-weight="600">No signal. Cloud is unreachable at the visit.</text>
+    </g>
+    <g transform="translate(96 460)">
+      <rect x="0" y="0" width="60" height="60" rx="30" fill="#B11226"/>
+      <text x="30" y="44" text-anchor="middle" font-weight="700"
+            font-size="40" fill="#F4ECD8">2</text>
+      <text x="96" y="44" font-weight="600">Nigeria NDPR 2023 — patient data can't leave.</text>
+    </g>
+    <g transform="translate(96 560)">
+      <rect x="0" y="0" width="60" height="60" rx="30" fill="#B11226"/>
+      <text x="30" y="44" text-anchor="middle" font-weight="700"
+            font-size="40" fill="#F4ECD8">3</text>
+      <text x="96" y="44" font-weight="600">$4–9M/yr in API fees across 200,000 CHWs.</text>
+      <text x="96" y="86" font-family="Inter, sans-serif" font-weight="400"
+            font-size="20" fill="#6B6F76">Cost math: docs/why-not-cloud.md (sourced)</text>
+    </g>
+  </g>
+
+  <g transform="translate(96 760)">
+    <rect x="0" y="0" width="1320" height="84" rx="14" fill="#0F766E"/>
+    <text x="32" y="56" font-family="Inter, sans-serif" font-weight="700"
+          font-size="32" fill="#F4ECD8">
+      ✓ No signal needed     ✓ Data stays on phone     ✓ $0 per visit
+    </text>
+  </g>
+
+</svg>

@@ -4,7 +4,7 @@
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE) [![Built with Gemma](https://img.shields.io/badge/Built%20with-Gemma%204-c9532a.svg)](https://ai.google.dev/gemma)
 
-**Try it now** → [chwcompanion.pages.dev](https://chwcompanion.pages.dev) (Chrome 113+)  ·  **Download APK** → [github.com/A-SHOJAEI/chw-companion/releases](https://github.com/A-SHOJAEI/chw-companion/releases)
+**Try it now** → [chw-companion.vercel.app](https://chw-companion.vercel.app) (Chrome 113+)  ·  **Download APK** → [github.com/A-SHOJAEI/chw-companion/releases](https://github.com/A-SHOJAEI/chw-companion/releases)
 
 A community health worker records a 60-second voice note in Hausa, captures three photos (face, ankle, urinalysis dipstick), and `google/gemma-4-E4B-it` emits a structured triage decision in a single forward pass — `record_vitals`, `flag_danger_sign`, `recommend_action`, `schedule_followup` — entirely on-device. No signal. No cloud account. No patient data leaving the phone.
 
@@ -53,7 +53,7 @@ Defined in [`src/lib/tools.ts`](src/lib/tools.ts); zod-validated at the JS↔nat
 ### Browser demo (no install)
 
 ```
-open https://chwcompanion.pages.dev
+open https://chw-companion.vercel.app
 ```
 
 Chrome 113+ for WebGPU; older browsers fall back to canned-replay JSON identical to what the Android build produces.

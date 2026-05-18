@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"
+     font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#FBF6E8"/>
+      <stop offset="100%" stop-color="#F4ECD8"/>
+    </radialGradient>
+    <linearGradient id="ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C9532A"/>
+      <stop offset="100%" stop-color="#E8A33D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect x="0" y="0" width="260" height="14" fill="url(#ribbon)"/>
+  <rect x="0" y="0" width="14" height="260" fill="url(#ribbon)"/>
+
+  <!-- Brand mark -->
+  <g transform="translate(96 96)">
+    <rect x="0" y="0" width="56" height="56" rx="12" fill="#C9532A"/>
+    <text x="28" y="40" text-anchor="middle" font-family="Fraunces, serif"
+          font-weight="700" font-size="28" fill="#F4ECD8">C</text>
+  </g>
+  <text x="172" y="135" font-family="Inter, sans-serif" font-weight="500"
+        font-size="16" fill="#6B6F76" letter-spacing="3">CHW COMPANION</text>
+
+  <!-- Beat chip -->
+  <g transform="translate(96 968)">
+    <circle cx="8" cy="8" r="8" fill="#C9532A"/>
+    <text x="28" y="14" font-family="Inter, sans-serif" font-weight="600"
+          font-size="14" fill="#6B6F76" letter-spacing="2">01 — SETTING</text>
+  </g>
+
+  <text x="960" y="500" text-anchor="middle" font-family="Fraunces, serif"
+        font-weight="700" font-size="120" fill="#1B2A4E">Northern Nigeria.</text>
+  <text x="960" y="640" text-anchor="middle" font-family="Inter, sans-serif"
+        font-weight="400" font-size="56" fill="#6B6F76">6:14 in the morning.</text>
+
+</svg>

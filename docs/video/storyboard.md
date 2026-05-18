@@ -25,7 +25,7 @@ Locked. Hand this verbatim to any editor.
 | 10 | 2:10 | 2:25 | 0:15 | Animated Mapbox map of Africa, dots bloom across rural villages from Lagos outward | Mapbox studio export + animated overlay | **EN VO:** "Two hundred thousand community health workers in Africa. One-point-eight billion people more than two hours from a hospital." | — | Scale. Music builds here. |
 | 11 | 2:25 | 2:40 | 0:15 | Three CHWs from different regions — Kenya, India, Peru — same app on their phones, three different languages on screen | Stock (Pexels "community health worker [region]") + UI mocks from `docs/visual/ui-mockups.html` localized to Swahili / Hindi / Quechua | **EN VO:** "Gemma 4 speaks one hundred and forty languages. Hausa today. Swahili, Quechua, Bambara — next week." | — | Universality. Same product, different patients. |
 | 12 | 2:40 | 2:52 | 0:12 | Fatima holding her newborn at home, days later | Stock ("African mother newborn home") | **EN VO:** "Aisha told us something we won't forget: 'Now I don't have to guess.'" | — | Heart. Music returns to single instrument. |
-| 13 | 2:52 | 3:00 | 0:08 | Closing card | `docs/visual/lower-thirds.html` frame 5 | (Single piano note — no VO) | **"CHW COMPANION — A midwife in every pocket. Built with Gemma. Apache 2.0. github.com/<handle>/chw-companion"** | Memorable. The phrase "Built with Gemma" must be present on this card. |
+| 13 | 2:52 | 3:00 | 0:08 | Closing card | `docs/visual/lower-thirds.html` frame 5 | (Single piano note — no VO) | **"CHW COMPANION — A midwife in every pocket. Built with Gemma. Apache 2.0. github.com/A-SHOJAEI/chw-companion"** | Memorable. The phrase "Built with Gemma" must be present on this card. |
 
 ## Timing checks
 

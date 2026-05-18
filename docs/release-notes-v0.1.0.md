@@ -10,7 +10,7 @@
 - Hausa-default i18n with English toggle; TTS speech-back
 - QR-coded triage form PDF (expo-print) — offline-printable handoff to the receiving facility
 - Local notifications for `schedule_followup`
-- Browser WebGPU fallback at `chwcompanion.pages.dev` for judges who cannot sideload an APK
+- Browser WebGPU fallback at `chw-companion.vercel.app` for judges who cannot sideload an APK
 - Demo data seeder (3 historical visits + 1 upcoming follow-up) behind a long-press on the History header
 
 ## Install

@@ -1,0 +1,128 @@
+{
+  "$schema": "narration v1",
+  "notes": "Segments are ordered and timed against the storyboard. Each `text` is what OpenAI TTS speaks. `slide` points to a PNG in slides/. `pad_before/after_s` give silent buffer for breathing room. `duration_s` is a soft target; the real audio length is what wins.",
+  "voice": "coral",
+  "model": "gpt-4o-mini-tts",
+  "instructions": "Voice: warm, calm, mid-30s female with a soft Mid-Atlantic / West-African English accent. Tone: BBC documentary narrator — measured, intimate, never breathless. Cadence: deliberate. Land the numbers. Let short sentences breathe. The story is about a real person; treat it that way.",
+  "format": "mp3",
+  "sample_rate": 48000,
+  "segments": [
+    {
+      "id": "01_open",
+      "in_s": 0.0,
+      "duration_s": 8.0,
+      "pad_before_s": 0.5,
+      "pad_after_s": 0.5,
+      "slide": "01_open.png",
+      "text": "Northern Nigeria. Six fourteen in the morning."
+    },
+    {
+      "id": "02_aisha",
+      "in_s": 8.0,
+      "duration_s": 10.0,
+      "pad_before_s": 0.3,
+      "pad_after_s": 0.4,
+      "slide": "02_aisha.png",
+      "text": "Her name is Aisha. She is the only health worker in her village."
+    },
+    {
+      "id": "03_fatima",
+      "in_s": 18.0,
+      "duration_s": 12.0,
+      "pad_before_s": 0.3,
+      "pad_after_s": 0.5,
+      "slide": "03_fatima.png",
+      "text": "Today she will see Fatima. Fatima is pregnant. Her ankles are swollen. Pre-eclampsia kills fifty thousand women every year."
+    },
+    {
+      "id": "04_signal",
+      "in_s": 30.0,
+      "duration_s": 15.0,
+      "pad_before_s": 0.3,
+      "pad_after_s": 0.5,
+      "slide": "04_signal.png",
+      "text": "There is no signal in this village. The nearest doctor is four hours away. Aisha opens the app on her phone."
+    },
+    {
+      "id": "05_demo",
+      "in_s": 45.0,
+      "duration_s": 25.0,
+      "pad_before_s": 0.3,
+      "pad_after_s": 0.5,
+      "slide": "05_demo.png",
+      "text": "She records sixty seconds of conversation, in Hausa. She takes three photos. Face, ankle, urine dipstick. The phone listens. It sees. It thinks. All of it, on the device. Nothing leaves the phone."
+    },
+    {
+      "id": "06_triage",
+      "in_s": 70.0,
+      "duration_s": 15.0,
+      "pad_before_s": 0.3,
+      "pad_after_s": 0.5,
+      "slide": "06_triage.png",
+      "text": "The model returns a triage decision. Blood pressure one fifty-eight over one oh two. Urgent. Refer now. It writes the form. It speaks the recommendation back, in Hausa."
+    },
+    {
+      "id": "07_gemma",
+      "in_s": 85.0,
+      "duration_s": 14.0,
+      "pad_before_s": 0.4,
+      "pad_after_s": 0.6,
+      "slide": "07_gemma.png",
+      "text": "To do this in a single forward pass, the model has to be multimodal, cover Hausa, and fit on a consumer phone. Of the open-weights models in 2026, only Gemma 4 met all three."
+    },
+    {
+      "id": "08_moat",
+      "in_s": 98.0,
+      "duration_s": 17.0,
+      "pad_before_s": 0.3,
+      "pad_after_s": 0.5,
+      "slide": "08_moat.png",
+      "text": "A cloud A P I can't help here. There's no signal in the village. Nigerian law restricts cross-border patient data. And at two hundred thousand community health workers, the per-visit API fees come to millions a year."
+    },
+    {
+      "id": "09_sync",
+      "in_s": 115.0,
+      "duration_s": 15.0,
+      "pad_before_s": 0.3,
+      "pad_after_s": 0.5,
+      "slide": "09_sync.png",
+      "text": "When Aisha gets back to town, the visit syncs. The hospital in Kano knows Fatima is coming."
+    },
+    {
+      "id": "10_scale",
+      "in_s": 130.0,
+      "duration_s": 15.0,
+      "pad_before_s": 0.3,
+      "pad_after_s": 0.5,
+      "slide": "10_scale.png",
+      "text": "Two hundred thousand community health workers across Africa. One point eight billion people more than two hours from a hospital."
+    },
+    {
+      "id": "11_universal",
+      "in_s": 145.0,
+      "duration_s": 14.0,
+      "pad_before_s": 0.3,
+      "pad_after_s": 0.5,
+      "slide": "11_universal.png",
+      "text": "The app speaks Hausa today. The same code reaches the other hundred and thirty-nine languages Gemma 4 supports — Swahili, Quechua, Bambara, and the rest."
+    },
+    {
+      "id": "12_heart",
+      "in_s": 160.0,
+      "duration_s": 14.0,
+      "pad_before_s": 0.4,
+      "pad_after_s": 0.6,
+      "slide": "12_heart.png",
+      "text": "This is decision support — not a diagnosis. But for a community health worker, four hours from the nearest clinician, that distinction is the only one that matters."
+    },
+    {
+      "id": "13_close",
+      "in_s": 172.0,
+      "duration_s": 8.0,
+      "pad_before_s": 0.3,
+      "pad_after_s": 0.3,
+      "slide": "13_close.png",
+      "text": "C H W Companion. A midwife in every pocket. Built with Gemma."
+    }
+  ]
+}

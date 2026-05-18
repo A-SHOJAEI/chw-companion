@@ -45,16 +45,25 @@ Required text for the YouTube description and Kaggle writeup.
 
 ## B-roll attributions (per clip)
 
-- TBD
+Used in the auto-rendered submission video (`docs/video/auto/out/chw-companion.mp4`).
+Both images are illustrative — Aisha and Fatima are named characters in the storyboard,
+not real people we interviewed (the slides also carry a "PORTRAIT IS ILLUSTRATIVE" label).
+
+- **Healthcare-worker portrait** (slide 02). Photo by **Wundef** on Pexels.
+  <https://www.pexels.com/photo/5430213/> · Pexels Free License (free commercial use, no
+  attribution required, attribution provided as courtesy). Downloaded 2026-05-17.
+- **Pregnant-woman portrait** (slide 03). Photo by **Tima Miroshnichenko** on Pexels.
+  <https://www.pexels.com/photo/6463623/> · Pexels Free License. Downloaded 2026-05-17.
 
 ## Music
 
-- TBD — source (Epidemic Sound / Artlist / CC0), license, attribution if any.
+- None. The submission video uses voice-over only (gpt-4o-mini-tts, coral voice).
 
 ## Voice-over
 
-- Hausa VO: TBD (Fiverr seller name + invoice number)
-- English VO: TBD
+- English VO: synthesized via OpenAI's `gpt-4o-mini-tts` API (coral voice) on 2026-05-17.
+  Source text in `docs/video/auto/narration.json`. Per OpenAI's usage policies,
+  generated audio is owned by the user. No human VO; nothing to attribute.
 
 ## Footnote required on every submission medium
 

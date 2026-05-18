@@ -69,7 +69,7 @@ the deadline.
 > project firsthand, if applicable. It should be publicly accessible and not
 > require a login or paywall."
 
-**Our plan:** Both. Web demo at `chwcompanion.pages.dev` (Cloudflare Pages) as
+**Our plan:** Both. Web demo at `chw-companion.vercel.app` (Vercel) as
 the URL, plus a signed APK attached to a GitHub Release as fallback files.
 
 ## 6. Cover image — required for Media Gallery

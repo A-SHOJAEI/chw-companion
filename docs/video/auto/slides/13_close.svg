@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"
+     font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#FBF6E8"/>
+      <stop offset="100%" stop-color="#F4ECD8"/>
+    </radialGradient>
+    <linearGradient id="ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C9532A"/>
+      <stop offset="100%" stop-color="#E8A33D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect x="0" y="0" width="260" height="14" fill="url(#ribbon)"/>
+  <rect x="0" y="0" width="14" height="260" fill="url(#ribbon)"/>
+
+  <!-- Large centered brand mark -->
+  <g transform="translate(884 280)">
+    <rect x="0" y="0" width="152" height="152" rx="28" fill="#C9532A"/>
+    <text x="76" y="106" text-anchor="middle" font-family="Fraunces, serif"
+          font-weight="700" font-size="72" fill="#F4ECD8">C</text>
+  </g>
+
+  <text x="960" y="540" text-anchor="middle" font-family="Fraunces, serif"
+        font-weight="700" font-size="84" fill="#1B2A4E">CHW Companion</text>
+  <text x="960" y="610" text-anchor="middle" font-family="Inter, sans-serif"
+        font-weight="400" font-size="36" fill="#6B6F76">A midwife in every pocket.</text>
+
+  <g transform="translate(700 720)">
+    <rect x="0" y="0" width="520" height="80" rx="40" fill="#1B2A4E"/>
+    <text x="260" y="54" text-anchor="middle" font-family="Inter, sans-serif"
+          font-weight="700" font-size="32" fill="#F4ECD8" letter-spacing="2">
+      Built with Gemma
+    </text>
+  </g>
+
+  <text x="960" y="900" text-anchor="middle" font-family="Inter, sans-serif"
+        font-weight="500" font-size="22" fill="#6B6F76" letter-spacing="2">
+    APACHE 2.0  ·  github.com/A-SHOJAEI/chw-companion
+  </text>
+  <text x="960" y="940" text-anchor="middle" font-family="Inter, sans-serif"
+        font-weight="400" font-size="18" fill="#6B6F76">
+    Gemma Terms of Use: ai.google.dev/gemma/terms
+  </text>
+
+</svg>

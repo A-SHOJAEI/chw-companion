@@ -49,7 +49,7 @@ Swap Gemma 4 for any hosted alternative and four things break. Three of them are
 
 End-to-end validated across two surfaces. **macOS via the Cactus Python FFI**: text + image + audio → `schedule_followup` for Fatima at confidence 0.9998, in 24 seconds wall time. Reference output in [`spike-cactus/out/full.json`](../spike-cactus/out/full.json). **Android ARM64 emulator via cactus-react-native**: same JSON shape, same confidence, same tool call, in 42 seconds wall time online and 49 seconds with the device in airplane mode + Wi-Fi blocked at the kernel layer — `cloudHandoff: false` confirmed by the library's own self-report. Reference outputs in [`spike-cactus/out/android_online.json`](../spike-cactus/out/android_online.json) and [`spike-cactus/out/android_offline.json`](../spike-cactus/out/android_offline.json). The prefill token count tells the rest of the story: 165 tokens for text only, 437 with one image (+272 from the vision encoder), 514 with audio added (+77 — the audio conformer is doing real work, not a transcribe-then-LLM stand-in).
 
-The codebase: 4 screens, 6 components, 4 tool handlers with zod validation, encrypted SQLite, Hausa-default i18n with English toggle, Hausa TTS speech-back, QR-coded PDF triage forms (`expo-print`), local notifications for scheduled follow-ups, a constrained-decoding fallback that automatically narrows to a 2-tool subset when recent decode failure rate exceeds 30%, and 25 vitest tests covering the tool-call contract end-to-end. A WebGPU browser fallback at `chwcompanion.pages.dev` mirrors the same flow with canned-replay JSON, for judges who cannot sideload an APK.
+The codebase: 4 screens, 6 components, 4 tool handlers with zod validation, encrypted SQLite, Hausa-default i18n with English toggle, Hausa TTS speech-back, QR-coded PDF triage forms (`expo-print`), local notifications for scheduled follow-ups, a constrained-decoding fallback that automatically narrows to a 2-tool subset when recent decode failure rate exceeds 30%, and 25 vitest tests covering the tool-call contract end-to-end. A WebGPU browser fallback at `chw-companion.vercel.app` mirrors the same flow with canned-replay JSON, for judges who cannot sideload an APK.
 
 ## Limitations we'll say out loud
 
@@ -66,13 +66,13 @@ npx expo run:android        # Android 12+ device with ≥ 8 GB RAM
 
 The first launch downloads weights from Hugging Face (`Cactus-Compute/gemma-4-E4B-it`, int4, ~6 GB compressed) and caches them on device. Subsequent launches are local. For judges with a connected Android phone but no patience for the download, [`scripts/sideload-weights.sh`](../scripts/sideload-weights.sh) does the whole thing via `adb push` in ~5 minutes.
 
-The browser fallback at `chwcompanion.pages.dev` requires no install — open it in Chrome 113+ and tap *Run Test*.
+The browser fallback at `chw-companion.vercel.app` requires no install — open it in Chrome 113+ and tap *Run Test*.
 
 ## Links
 
 - **Code:** <https://github.com/A-SHOJAEI/chw-companion> (Apache 2.0)
-- **Video:** <https://youtube.com/watch?v={{YTID}}>
-- **Live demo:** <https://chwcompanion.pages.dev>
+- **Video:** <https://youtube.com/watch?v=UZu6QjrKXqM>
+- **Live demo:** <https://chw-companion.vercel.app>
 - **APK:** <https://github.com/A-SHOJAEI/chw-companion/releases/tag/v0.1.0>
 - **Model:** <https://huggingface.co/google/gemma-4-E4B-it>
 - **WHO MCPC source:** <https://www.who.int/publications/i/item/9789241565493>

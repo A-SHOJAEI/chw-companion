@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"
+     font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#FBF6E8"/>
+      <stop offset="100%" stop-color="#F4ECD8"/>
+    </radialGradient>
+    <linearGradient id="ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C9532A"/>
+      <stop offset="100%" stop-color="#E8A33D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect x="0" y="0" width="260" height="14" fill="url(#ribbon)"/>
+  <rect x="0" y="0" width="14" height="260" fill="url(#ribbon)"/>
+
+  <!-- Brand mark -->
+  <g transform="translate(96 96)">
+    <rect x="0" y="0" width="56" height="56" rx="12" fill="#C9532A"/>
+    <text x="28" y="40" text-anchor="middle" font-family="Fraunces, serif"
+          font-weight="700" font-size="28" fill="#F4ECD8">C</text>
+  </g>
+  <text x="172" y="135" font-family="Inter, sans-serif" font-weight="500"
+        font-size="16" fill="#6B6F76" letter-spacing="3">CHW COMPANION</text>
+
+  <!-- Beat chip -->
+  <g transform="translate(96 968)">
+    <circle cx="8" cy="8" r="8" fill="#E8A33D"/>
+    <text x="28" y="14" font-family="Inter, sans-serif" font-weight="600"
+          font-size="14" fill="#6B6F76" letter-spacing="2">04 — THE CONSTRAINT</text>
+  </g>
+
+  <!-- Airplane mode chip with explicit padding -->
+  <g transform="translate(96 320)">
+    <rect x="0" y="0" width="380" height="84" rx="42" fill="#E8A33D"/>
+    <!-- Tiny airplane glyph drawn as a path so it doesn't depend on emoji fonts -->
+    <g transform="translate(32 30) scale(0.045)" fill="#1B2A4E">
+      <path d="M480 192H365.71L260.61 8.06A16.014 16.014 0 0 0 246.71 0h-65.5c-10.63 0-18.3 10.17-15.38 20.39L214.86 192H112l-43.2-57.6c-3.02-4.03-7.77-6.4-12.8-6.4H16.01C5.6 128-2.04 137.78.49 147.88L32 256 .49 364.12C-2.04 374.22 5.6 384 16.01 384H56c5.04 0 9.78-2.37 12.8-6.4L112 320h102.86l-49.03 171.6c-2.92 10.22 4.75 20.4 15.38 20.4h65.5c5.74 0 11.04-3.08 13.89-8.06L365.71 320H480c35.35 0 96-28.65 96-64s-60.65-64-96-64z"/>
+    </g>
+    <text x="200" y="56" text-anchor="middle" font-family="Inter, sans-serif"
+          font-weight="700" font-size="26" fill="#1B2A4E" letter-spacing="2">AIRPLANE MODE</text>
+  </g>
+  <text x="96" y="510" font-family="Fraunces, serif"
+        font-weight="700" font-size="92" fill="#1B2A4E">No signal.</text>
+  <text x="96" y="616" font-family="Fraunces, serif"
+        font-weight="700" font-size="92" fill="#1B2A4E">No doctor.</text>
+  <text x="96" y="722" font-family="Fraunces, serif"
+        font-weight="700" font-size="92" fill="#1B2A4E">Four hours away.</text>
+
+</svg>
