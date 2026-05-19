@@ -75,3 +75,4 @@ web/.wrangler/
 .vscode/
 .idea/
 *.iml
+.claude/

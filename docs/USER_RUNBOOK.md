@@ -40,7 +40,7 @@ Estimated total wall time over 4 days: ~25 hours, mostly Day 3 (video shoot/edit
 
 ## DAY 1 (Fri May 15) — 4–6 hours
 
-- **Render visual artifacts via claude.ai** per build plan §7.1, 7.2, 7.4, 7.5:
+- **Render visual artifacts** per build plan §7.1, 7.2, 7.4, 7.5:
   - Design tokens HTML (§7.1)
   - SVG architecture diagram (§7.2) — save to `docs/architecture.svg`
   - UI mockups React artifact (§7.4) — screenshot 3 phones, save to `docs/screenshots/`
